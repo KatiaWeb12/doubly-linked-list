@@ -1,0 +1,2 @@
+const LIST_CAPACITY = 20;
+
