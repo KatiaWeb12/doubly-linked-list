@@ -1,0 +1,670 @@
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe,
+
+ВНЕЗАПНО: Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x00435F14 в функции listLoad() в файле C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/list.cpp на строке 31. Попытка записать данные по адресу NULL в модуле C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 175, Date: 2025-12-31 23:02:50 +0400], Instance: 0x005101DC (32-bit), Flags: Cmdre0, Thread: 0x440C (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00435F14 in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: listLoad() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/list.cpp:31:
+
+     29: ErrorCode listLoad(struct list_t* list, size_t listCapacity){
+     30: 
+=>   31:     list->capacity = listCapacity;
+     32:     list->head = 1;
+     33:     list->tail = 1;
+
+# 1 0x00435EC8 in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: main() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/list.cpp:15:
+
+     13: 
+     14:     list_t* list = NULL;
+=>   15:     listLoad(list, LIST_CAPACITY);
+     16: 
+     17:     #ifdef LIST_DEBUG
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 175, Date: 2025-12-31 23:02:50 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Kate\Desktop\downloads\TX\TXLib.h
+Compiled:	Oct 29 2026 17:26:49, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Oct 29 2026 17:26:53
+
+Run file:	C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe
+Directory:	C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe,
+
+ВНЕЗАПНО: signal (11, 0x00): SIGSEGV: Доступ по неверному указателю. Ставьте ассерты! 
+
+Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x00435F14 в функции listLoad() в файле C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/list.cpp на строке 31. Попытка записать данные по адресу NULL в модуле C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 175, Date: 2025-12-31 23:02:50 +0400], Instance: 0x005101DC (32-bit), Flags: Cmdre0, Thread: 0x440C (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00435F14 in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: listLoad() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/list.cpp:31:
+
+     29: ErrorCode listLoad(struct list_t* list, size_t listCapacity){
+     30: 
+=>   31:     list->capacity = listCapacity;
+     32:     list->head = 1;
+     33:     list->tail = 1;
+
+# 1 0x00435EC8 in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: main() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/list.cpp:15:
+
+     13: 
+     14:     list_t* list = NULL;
+=>   15:     listLoad(list, LIST_CAPACITY);
+     16: 
+     17:     #ifdef LIST_DEBUG
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 175, Date: 2025-12-31 23:02:50 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Kate\Desktop\downloads\TX\TXLib.h
+Compiled:	Oct 29 2026 17:26:49, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Oct 29 2026 17:26:53
+
+Run file:	C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe
+Directory:	C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe,
+
+ВНЕЗАПНО: Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x00435F14 в функции listLoad() в файле C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/list.cpp на строке 31. Попытка записать данные по адресу NULL в модуле C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 175, Date: 2025-12-31 23:02:50 +0400], Instance: 0x005101DC (32-bit), Flags: Cmdre0, Thread: 0x8B4 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00435F14 in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: listLoad() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/list.cpp:31:
+
+     29: ErrorCode listLoad(struct list_t* list, size_t listCapacity){
+     30: 
+=>   31:     list->capacity = listCapacity;
+     32:     list->head = 1;
+     33:     list->tail = 1;
+
+# 1 0x00435EC8 in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: main() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/list.cpp:15:
+
+     13: 
+     14:     list_t* list = 0;
+=>   15:     listLoad(list, LIST_CAPACITY);
+     16: 
+     17:     #ifdef LIST_DEBUG
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 175, Date: 2025-12-31 23:02:50 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Kate\Desktop\downloads\TX\TXLib.h
+Compiled:	Oct 29 2026 17:27:59, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Oct 29 2026 17:28:02
+
+Run file:	C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe
+Directory:	C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe,
+
+ВНЕЗАПНО: signal (11, 0x00): SIGSEGV: Доступ по неверному указателю. Ставьте ассерты! 
+
+Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x00435F14 в функции listLoad() в файле C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/list.cpp на строке 31. Попытка записать данные по адресу NULL в модуле C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 175, Date: 2025-12-31 23:02:50 +0400], Instance: 0x005101DC (32-bit), Flags: Cmdre0, Thread: 0x8B4 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00435F14 in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: listLoad() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/list.cpp:31:
+
+     29: ErrorCode listLoad(struct list_t* list, size_t listCapacity){
+     30: 
+=>   31:     list->capacity = listCapacity;
+     32:     list->head = 1;
+     33:     list->tail = 1;
+
+# 1 0x00435EC8 in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: main() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/list.cpp:15:
+
+     13: 
+     14:     list_t* list = 0;
+=>   15:     listLoad(list, LIST_CAPACITY);
+     16: 
+     17:     #ifdef LIST_DEBUG
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 175, Date: 2025-12-31 23:02:50 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Kate\Desktop\downloads\TX\TXLib.h
+Compiled:	Oct 29 2026 17:27:59, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Oct 29 2026 17:28:02
+
+Run file:	C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe
+Directory:	C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe,
+
+ВНЕЗАПНО: Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x00435F14 в функции listLoad() в файле C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/list.cpp на строке 31. Попытка записать данные по адресу NULL в модуле C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 175, Date: 2025-12-31 23:02:50 +0400], Instance: 0x005101DC (32-bit), Flags: Cmdre0, Thread: 0x6A34 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00435F14 in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: listLoad() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/list.cpp:31:
+
+     29: ErrorCode listLoad(struct list_t* list, const size_t listCapacity){
+     30: 
+=>   31:     list->capacity = listCapacity;
+     32:     list->head = 1;
+     33:     list->tail = 1;
+
+# 1 0x00435EC8 in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: main() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/list.cpp:15:
+
+     13: 
+     14:     list_t* list = 0;
+=>   15:     listLoad(list, LIST_CAPACITY);
+     16: 
+     17:     #ifdef LIST_DEBUG
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 175, Date: 2025-12-31 23:02:50 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Kate\Desktop\downloads\TX\TXLib.h
+Compiled:	Oct 29 2026 17:28:59, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Oct 29 2026 17:29:02
+
+Run file:	C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe
+Directory:	C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe,
+
+ВНЕЗАПНО: signal (11, 0x00): SIGSEGV: Доступ по неверному указателю. Ставьте ассерты! 
+
+Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x00435F14 в функции listLoad() в файле C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/list.cpp на строке 31. Попытка записать данные по адресу NULL в модуле C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 175, Date: 2025-12-31 23:02:50 +0400], Instance: 0x005101DC (32-bit), Flags: Cmdre0, Thread: 0x6A34 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00435F14 in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: listLoad() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/list.cpp:31:
+
+     29: ErrorCode listLoad(struct list_t* list, const size_t listCapacity){
+     30: 
+=>   31:     list->capacity = listCapacity;
+     32:     list->head = 1;
+     33:     list->tail = 1;
+
+# 1 0x00435EC8 in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: main() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/list.cpp:15:
+
+     13: 
+     14:     list_t* list = 0;
+=>   15:     listLoad(list, LIST_CAPACITY);
+     16: 
+     17:     #ifdef LIST_DEBUG
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 175, Date: 2025-12-31 23:02:50 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Kate\Desktop\downloads\TX\TXLib.h
+Compiled:	Oct 29 2026 17:28:59, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Oct 29 2026 17:29:02
+
+Run file:	C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe
+Directory:	C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe,
+
+ВНЕЗАПНО: Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x00435F14 в функции listLoad() в файле C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/list.cpp на строке 31. Попытка записать данные по адресу NULL в модуле C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 175, Date: 2025-12-31 23:02:50 +0400], Instance: 0x005101DC (32-bit), Flags: Cmdre0, Thread: 0x3974 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00435F14 in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: listLoad() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/list.cpp:31:
+
+     29: ErrorCode listLoad(struct list_t* list, const size_t listCapacity){
+     30: 
+=>   31:     list->capacity = listCapacity;
+     32:     list->head = 1;
+     33:     list->tail = 1;
+
+# 1 0x00435EC8 in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: main() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/list.cpp:15:
+
+     13: 
+     14:     list_t* list = 0;
+=>   15:     listLoad(list, LIST_CAPACITY);
+     16: 
+     17:     #ifdef LIST_DEBUG
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 175, Date: 2025-12-31 23:02:50 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Kate\Desktop\downloads\TX\TXLib.h
+Compiled:	Oct 29 2026 17:28:59, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Oct 29 2026 17:29:33
+
+Run file:	C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe
+Directory:	C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe,
+
+ВНЕЗАПНО: signal (11, 0x00): SIGSEGV: Доступ по неверному указателю. Ставьте ассерты! 
+
+Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x00435F14 в функции listLoad() в файле C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/list.cpp на строке 31. Попытка записать данные по адресу NULL в модуле C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 175, Date: 2025-12-31 23:02:50 +0400], Instance: 0x005101DC (32-bit), Flags: Cmdre0, Thread: 0x3974 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00435F14 in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: listLoad() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/list.cpp:31:
+
+     29: ErrorCode listLoad(struct list_t* list, const size_t listCapacity){
+     30: 
+=>   31:     list->capacity = listCapacity;
+     32:     list->head = 1;
+     33:     list->tail = 1;
+
+# 1 0x00435EC8 in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: main() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/list.cpp:15:
+
+     13: 
+     14:     list_t* list = 0;
+=>   15:     listLoad(list, LIST_CAPACITY);
+     16: 
+     17:     #ifdef LIST_DEBUG
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 175, Date: 2025-12-31 23:02:50 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Kate\Desktop\downloads\TX\TXLib.h
+Compiled:	Oct 29 2026 17:28:59, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Oct 29 2026 17:29:33
+
+Run file:	C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe
+Directory:	C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe,
+
+ВНЕЗАПНО: Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x00435F14 в функции listLoad() в файле C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/list.cpp на строке 31. Попытка записать данные по адресу NULL в модуле C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 175, Date: 2025-12-31 23:02:50 +0400], Instance: 0x005101DC (32-bit), Flags: Cmdre0, Thread: 0x4B8 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00435F14 in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: listLoad() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/list.cpp:31:
+
+     29: ErrorCode listLoad(struct list_t* list, const size_t listCapacity){
+     30: 
+=>   31:     list->capacity = listCapacity;
+     32:     list->head = 1;
+     33:     list->tail = 1;
+
+# 1 0x00435EC8 in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: main() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/list.cpp:15:
+
+     13: 
+     14:     list_t* list = 0;
+=>   15:     listLoad(list, LIST_CAPACITY);
+     16: 
+     17:     #ifdef LIST_DEBUG
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 175, Date: 2025-12-31 23:02:50 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Kate\Desktop\downloads\TX\TXLib.h
+Compiled:	Oct 29 2026 17:29:37, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Oct 29 2026 17:29:40
+
+Run file:	C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe
+Directory:	C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe,
+
+ВНЕЗАПНО: signal (11, 0x00): SIGSEGV: Доступ по неверному указателю. Ставьте ассерты! 
+
+Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x00435F14 в функции listLoad() в файле C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/list.cpp на строке 31. Попытка записать данные по адресу NULL в модуле C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 175, Date: 2025-12-31 23:02:50 +0400], Instance: 0x005101DC (32-bit), Flags: Cmdre0, Thread: 0x4B8 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00435F14 in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: listLoad() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/list.cpp:31:
+
+     29: ErrorCode listLoad(struct list_t* list, const size_t listCapacity){
+     30: 
+=>   31:     list->capacity = listCapacity;
+     32:     list->head = 1;
+     33:     list->tail = 1;
+
+# 1 0x00435EC8 in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: main() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/list.cpp:15:
+
+     13: 
+     14:     list_t* list = 0;
+=>   15:     listLoad(list, LIST_CAPACITY);
+     16: 
+     17:     #ifdef LIST_DEBUG
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 175, Date: 2025-12-31 23:02:50 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Kate\Desktop\downloads\TX\TXLib.h
+Compiled:	Oct 29 2026 17:29:37, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Oct 29 2026 17:29:40
+
+Run file:	C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe
+Directory:	C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe,
+
+ВНЕЗАПНО: Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x00435F27 в функции listLoad() в файле C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/list.cpp на строке 33. Попытка записать данные по адресу NULL в модуле C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 175, Date: 2025-12-31 23:02:50 +0400], Instance: 0x005101DC (32-bit), Flags: Cmdre0, Thread: 0x5914 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00435F27 in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: listLoad() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/list.cpp:33:
+
+     31:     printf("%u", listCapacity);
+     32: 
+=>   33:     list->capacity = listCapacity;
+     34:     list->head = 1;
+     35:     list->tail = 1;
+
+# 1 0x00435EC8 in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: main() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/list.cpp:15:
+
+     13: 
+     14:     list_t* list = NULL;
+=>   15:     listLoad(list, LIST_CAPACITY);
+     16: 
+     17:     #ifdef LIST_DEBUG
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 175, Date: 2025-12-31 23:02:50 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Kate\Desktop\downloads\TX\TXLib.h
+Compiled:	Oct 29 2026 17:31:23, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Oct 29 2026 17:31:26
+
+Run file:	C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe
+Directory:	C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe,
+
+ВНЕЗАПНО: signal (11, 0x00): SIGSEGV: Доступ по неверному указателю. Ставьте ассерты! 
+
+Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x00435F27 в функции listLoad() в файле C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/list.cpp на строке 33. Попытка записать данные по адресу NULL в модуле C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 175, Date: 2025-12-31 23:02:50 +0400], Instance: 0x005101DC (32-bit), Flags: Cmdre0, Thread: 0x5914 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00435F27 in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: listLoad() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/list.cpp:33:
+
+     31:     printf("%u", listCapacity);
+     32: 
+=>   33:     list->capacity = listCapacity;
+     34:     list->head = 1;
+     35:     list->tail = 1;
+
+# 1 0x00435EC8 in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: main() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/list.cpp:15:
+
+     13: 
+     14:     list_t* list = NULL;
+=>   15:     listLoad(list, LIST_CAPACITY);
+     16: 
+     17:     #ifdef LIST_DEBUG
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 175, Date: 2025-12-31 23:02:50 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Kate\Desktop\downloads\TX\TXLib.h
+Compiled:	Oct 29 2026 17:31:23, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Oct 29 2026 17:31:26
+
+Run file:	C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe
+Directory:	C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe,
+
+ВНЕЗАПНО: Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x00435ECC в функции main() в файле C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/list.cpp на строке 23. Попытка записать данные по адресу 0x00000014 в модуле C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 175, Date: 2025-12-31 23:02:50 +0400], Instance: 0x005101DC (32-bit), Flags: Cmdre0, Thread: 0x67B4 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00435ECC in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: main() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/list.cpp:23:
+
+     21:             __func__,
+     22:             __LINE__
+=>   23:         };
+     24:     #endif
+     25: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 175, Date: 2025-12-31 23:02:50 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Kate\Desktop\downloads\TX\TXLib.h
+Compiled:	Oct 29 2026 17:33:24, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Oct 29 2026 17:33:26
+
+Run file:	C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe
+Directory:	C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe,
+
+ВНЕЗАПНО: signal (11, 0x00): SIGSEGV: Доступ по неверному указателю. Ставьте ассерты! 
+
+Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x00435ECC в функции main() в файле C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/list.cpp на строке 23. Попытка записать данные по адресу 0x00000014 в модуле C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 175, Date: 2025-12-31 23:02:50 +0400], Instance: 0x005101DC (32-bit), Flags: Cmdre0, Thread: 0x67B4 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00435ECC in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: main() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/list.cpp:23:
+
+     21:             __func__,
+     22:             __LINE__
+=>   23:         };
+     24:     #endif
+     25: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 175, Date: 2025-12-31 23:02:50 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Kate\Desktop\downloads\TX\TXLib.h
+Compiled:	Oct 29 2026 17:33:24, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Oct 29 2026 17:33:26
+
+Run file:	C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe
+Directory:	C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list
+
+--------------------------------------------------
