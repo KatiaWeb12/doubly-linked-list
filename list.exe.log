@@ -668,3 +668,461 @@ Run file:	C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe
 Directory:	C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list
 
 --------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe,
+
+ВНЕЗАПНО: Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x00436661 в функции printLinArr() в файле C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/list.cpp на строке 185. Попытка прочесть данные по адресу 0x5FBD7F7C в модуле C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 175, Date: 2025-12-31 23:02:50 +0400], Instance: 0x005111DC (32-bit), Flags: Cmdre0, Thread: 0x6B04 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00436661 in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: printLinArr() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/list.cpp:185:
+
+    183:     int n = 1;
+    184:     while(n != 0){
+=>  185:         printf("%d", list->listArr[n].value);
+    186:         n = list->listArr[n].next;
+    187:     }
+
+# 1 0x0043651B in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: listDump() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/list.cpp:145:
+
+    143:     printf("}\n");
+    144: 
+=>  145:     printLinArr(list);
+    146: 
+    147:     getchar();
+
+# 2 0x00436188 in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: listLoad() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/list.cpp:66:
+
+     64: 
+     65:     #ifdef LIST_DEBUG
+=>   66:         listDump(list);
+     67:     #endif
+     68: 
+
+# 3 0x00435ED6 in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: main() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/list.cpp:15:
+
+     13: 
+     14:     list_t list = {};
+=>   15:     listLoad(&list, LIST_CAPACITY);
+     16: 
+     17:     #ifdef LIST_DEBUG
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 175, Date: 2025-12-31 23:02:50 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Kate\Desktop\downloads\TX\TXLib.h
+Compiled:	Oct 29 2026 18:49:52, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Oct 29 2026 18:49:55
+
+Run file:	C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe
+Directory:	C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe,
+
+ВНЕЗАПНО: signal (11, 0x00): SIGSEGV: Доступ по неверному указателю. Ставьте ассерты! 
+
+Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x00436661 в функции printLinArr() в файле C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/list.cpp на строке 185. Попытка прочесть данные по адресу 0x5FBD7F7C в модуле C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 175, Date: 2025-12-31 23:02:50 +0400], Instance: 0x005111DC (32-bit), Flags: Cmdre0, Thread: 0x6B04 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00436661 in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: printLinArr() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/list.cpp:185:
+
+    183:     int n = 1;
+    184:     while(n != 0){
+=>  185:         printf("%d", list->listArr[n].value);
+    186:         n = list->listArr[n].next;
+    187:     }
+
+# 1 0x0043651B in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: listDump() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/list.cpp:145:
+
+    143:     printf("}\n");
+    144: 
+=>  145:     printLinArr(list);
+    146: 
+    147:     getchar();
+
+# 2 0x00436188 in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: listLoad() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/list.cpp:66:
+
+     64: 
+     65:     #ifdef LIST_DEBUG
+=>   66:         listDump(list);
+     67:     #endif
+     68: 
+
+# 3 0x00435ED6 in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: main() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/list.cpp:15:
+
+     13: 
+     14:     list_t list = {};
+=>   15:     listLoad(&list, LIST_CAPACITY);
+     16: 
+     17:     #ifdef LIST_DEBUG
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 175, Date: 2025-12-31 23:02:50 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Kate\Desktop\downloads\TX\TXLib.h
+Compiled:	Oct 29 2026 18:49:52, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Oct 29 2026 18:49:55
+
+Run file:	C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe
+Directory:	C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe,
+
+ВНЕЗАПНО: Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x77CB2600 в функции RtlEnterCriticalSection(). Попытка записать данные по адресу 0x31656493 в модуле C:\WINDOWS\SYSTEM32\ntdll.dll. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 175, Date: 2025-12-31 23:02:50 +0400], Instance: 0x005111DC (32-bit), Flags: Cmdre0, Thread: 0x40BC (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x77CB2600 in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlEnterCriticalSection()
+# 1 0x76DEA984 in C:\WINDOWS\System32\msvcrt.dll: unlock()
+# 2 0x76DF6F78 in C:\WINDOWS\System32\msvcrt.dll: fprintf()
+
+# 3 0x004367AD in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: createGraphicSystem() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/list.cpp:171:
+
+    169:     getGraphicBlock(list->listArr[0], elBlock);
+    170: 
+=>  171:     fprintf(graphicFile, "%s %s %s", "digraph{\n\t", elBlock, "\n}\n");
+    172: 
+    173:     FCLOSE(graphicFile);
+
+# 4 0x76DDE727 in C:\WINDOWS\System32\msvcrt.dll: strerror_s()
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 175, Date: 2025-12-31 23:02:50 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Kate\Desktop\downloads\TX\TXLib.h
+Compiled:	Oct 30 2026 15:32:31, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Oct 30 2026 15:33:02
+
+Run file:	C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe
+Directory:	C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe,
+
+ВНЕЗАПНО: signal (11, 0x00): SIGSEGV: Доступ по неверному указателю. Ставьте ассерты! 
+
+Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x77CB2600 в функции RtlEnterCriticalSection(). Попытка записать данные по адресу 0x31656493 в модуле C:\WINDOWS\SYSTEM32\ntdll.dll. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 175, Date: 2025-12-31 23:02:50 +0400], Instance: 0x005111DC (32-bit), Flags: Cmdre0, Thread: 0x40BC (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x77CB2600 in C:\WINDOWS\SYSTEM32\ntdll.dll: RtlEnterCriticalSection()
+# 1 0x76DEA984 in C:\WINDOWS\System32\msvcrt.dll: unlock()
+# 2 0x76DF6F78 in C:\WINDOWS\System32\msvcrt.dll: fprintf()
+
+# 3 0x004367AD in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: createGraphicSystem() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/list.cpp:171:
+
+    169:     getGraphicBlock(list->listArr[0], elBlock);
+    170: 
+=>  171:     fprintf(graphicFile, "%s %s %s", "digraph{\n\t", elBlock, "\n}\n");
+    172: 
+    173:     FCLOSE(graphicFile);
+
+# 4 0x76DDE727 in C:\WINDOWS\System32\msvcrt.dll: strerror_s()
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 175, Date: 2025-12-31 23:02:50 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Kate\Desktop\downloads\TX\TXLib.h
+Compiled:	Oct 30 2026 15:32:31, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Oct 30 2026 15:33:02
+
+Run file:	C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe
+Directory:	C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe,
+
+ВНЕЗАПНО: Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x76DFEE84 в функции ungetwc(). Попытка прочесть данные по адресу 0x00000001 в модуле C:\WINDOWS\System32\msvcrt.dll. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 175, Date: 2025-12-31 23:02:50 +0400], Instance: 0x005111DC (32-bit), Flags: Cmdre0, Thread: 0x760C (Main), GetLastError(): 183 (Невозможно создать файл, так как он уже существует). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x76DFEE84 in C:\WINDOWS\System32\msvcrt.dll: ungetwc()
+# 1 0x76DF89BD in C:\WINDOWS\System32\msvcrt.dll: sprintf()
+
+# 2 0x004365FB in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: getGraphicBlock() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/list.cpp:156:
+
+    154:                     " |value = ",
+    155:                     elem.value,
+=>  156:                     "}\";]");
+    157: 
+    158:     return;
+
+# 3 0x00436740 in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: createGraphicSystem() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/list.cpp:176:
+
+    174:     char elBlock[PROGRAM_CAPACITY] = "";
+    175: 
+=>  176:     getGraphicBlock(list->listArr[0], elBlock);
+    177: 
+    178:     fprintf(graphicFile, "%s %s %s", "digraph{\n\t", elBlock, "\n}\n");
+
+# 4 0x00436028 in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: main() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/list.cpp:39:
+
+     37:     listDelElem(&list, 7);
+     38: 
+=>   39:     createGraphicSystem("graph.txt", &list);
+     40: }
+     41: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 175, Date: 2025-12-31 23:02:50 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Kate\Desktop\downloads\TX\TXLib.h
+Compiled:	Oct 30 2026 15:49:25, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Oct 30 2026 15:49:29
+
+Run file:	C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe
+Directory:	C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe,
+
+ВНЕЗАПНО: signal (11, 0x00): SIGSEGV: Доступ по неверному указателю. Ставьте ассерты! 
+
+Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x76DFEE84 в функции ungetwc(). Попытка прочесть данные по адресу 0x00000001 в модуле C:\WINDOWS\System32\msvcrt.dll. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 175, Date: 2025-12-31 23:02:50 +0400], Instance: 0x005111DC (32-bit), Flags: Cmdre0, Thread: 0x760C (Main), GetLastError(): 183 (Невозможно создать файл, так как он уже существует). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x76DFEE84 in C:\WINDOWS\System32\msvcrt.dll: ungetwc()
+# 1 0x76DF89BD in C:\WINDOWS\System32\msvcrt.dll: sprintf()
+
+# 2 0x004365FB in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: getGraphicBlock() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/list.cpp:156:
+
+    154:                     " |value = ",
+    155:                     elem.value,
+=>  156:                     "}\";]");
+    157: 
+    158:     return;
+
+# 3 0x00436740 in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: createGraphicSystem() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/list.cpp:176:
+
+    174:     char elBlock[PROGRAM_CAPACITY] = "";
+    175: 
+=>  176:     getGraphicBlock(list->listArr[0], elBlock);
+    177: 
+    178:     fprintf(graphicFile, "%s %s %s", "digraph{\n\t", elBlock, "\n}\n");
+
+# 4 0x00436028 in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: main() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/list.cpp:39:
+
+     37:     listDelElem(&list, 7);
+     38: 
+=>   39:     createGraphicSystem("graph.txt", &list);
+     40: }
+     41: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 175, Date: 2025-12-31 23:02:50 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Kate\Desktop\downloads\TX\TXLib.h
+Compiled:	Oct 30 2026 15:49:25, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Oct 30 2026 15:49:29
+
+Run file:	C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe
+Directory:	C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe,
+
+ВНЕЗАПНО: Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x0043644B в функции getFreeEl() в файле C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/list.cpp на строке 118. Попытка прочесть данные по адресу 0x87154A48 в модуле C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 175, Date: 2025-12-31 23:02:50 +0400], Instance: 0x005111E4 (32-bit), Flags: Cmdre0, Thread: 0x67D8 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0043644B in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: getFreeEl() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/list.cpp:118:
+
+    116:     size_t i = list->free;
+    117: 
+=>  118:     list->free = list->listArr[i].next;
+    119: 
+    120:     *error = ERR_OK;
+
+# 1 0x004362E8 in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: listAddElem() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/list.cpp:91:
+
+     89: 
+     90:     ErrorCode error = ERR_OK;
+=>   91:     size_t emptyIndex = getFreeEl(list, &error);
+     92:     if (error != ERR_OK) return error;
+     93: 
+
+# 2 0x00435F5F in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: main() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/list.cpp:24:
+
+     22:     listAddElem(&list, 0, 10);
+     23:     listAddElem(&list, 1, 20);
+=>   24:     listAddElem(&list, 2, 30);
+     25:     listAddElem(&list, 3, 40);
+     26:     listAddElem(&list, 4, 50);
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 175, Date: 2025-12-31 23:02:50 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Kate\Desktop\downloads\TX\TXLib.h
+Compiled:	Oct 31 2026 23:16:40, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Oct 31 2026 23:16:43
+
+Run file:	C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe
+Directory:	C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\log_31.10.2026_23-16-43
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe,
+
+ВНЕЗАПНО: signal (11, 0x00): SIGSEGV: Доступ по неверному указателю. Ставьте ассерты! 
+
+Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x0043644B в функции getFreeEl() в файле C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/list.cpp на строке 118. Попытка прочесть данные по адресу 0x87154A48 в модуле C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 175, Date: 2025-12-31 23:02:50 +0400], Instance: 0x005111E4 (32-bit), Flags: Cmdre0, Thread: 0x67D8 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0043644B in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: getFreeEl() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/list.cpp:118:
+
+    116:     size_t i = list->free;
+    117: 
+=>  118:     list->free = list->listArr[i].next;
+    119: 
+    120:     *error = ERR_OK;
+
+# 1 0x004362E8 in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: listAddElem() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/list.cpp:91:
+
+     89: 
+     90:     ErrorCode error = ERR_OK;
+=>   91:     size_t emptyIndex = getFreeEl(list, &error);
+     92:     if (error != ERR_OK) return error;
+     93: 
+
+# 2 0x00435F5F in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: main() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/list.cpp:24:
+
+     22:     listAddElem(&list, 0, 10);
+     23:     listAddElem(&list, 1, 20);
+=>   24:     listAddElem(&list, 2, 30);
+     25:     listAddElem(&list, 3, 40);
+     26:     listAddElem(&list, 4, 50);
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 175, Date: 2025-12-31 23:02:50 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Kate\Desktop\downloads\TX\TXLib.h
+Compiled:	Oct 31 2026 23:16:40, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Oct 31 2026 23:16:43
+
+Run file:	C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe
+Directory:	C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\log_31.10.2026_23-16-43
+
+--------------------------------------------------
