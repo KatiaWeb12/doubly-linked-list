@@ -1,5 +1,7 @@
 body {
     background-color: #F0F7FF;
+    padding-right: 40px;
+    padding-left: 40px;
 }
 
 pre{
@@ -38,5 +40,32 @@ tr:hover td {
 p{
     font-family: "Arial";
     color: #253A68;
+    font-size: 25px;
+}
+.table-text {
+    display: flex;
+    gap: 40px;
+}
+
+caption {
+    caption-side: top;
+    text-align: center;
+
+    font-family: Arial, sans-serif;
     font-size: 20px;
+    font-weight: 600;
+
+    color: #253A68;
+    background-color: #84CEEB;
+
+    padding: 12px 24px;
+    margin-bottom: 12px;
+
+    border: 2px solid #5680E9;
+    border-radius: 12px;
+}
+
+h3 {
+    color: #253A68;
+    font-size: 28px;
 }

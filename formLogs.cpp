@@ -45,6 +45,16 @@ void printDebugInfoIntoLogFile(FILE* file, list_t* list){
     assert(list);
     assert(file);
 
+    fprintf(file, "<div class=\"table-text\">\n");
+
+    fprintf(file, "<table border=\"1\">");
+    fprintf(file, "<caption>listArr [%p]: </caption>", list->listArr);
+
+    printArr(file, list->listArr);
+
+    fprintf(file, "</table>\n");
+
+    fprintf(file, "<div class=\"info\">\n");
     fprintf(file, "<p>\nlist_t '%s'[%p] created by %s() at %s:%u</p>",
             list->debugInfo.name,
             list,
@@ -53,17 +63,13 @@ void printDebugInfoIntoLogFile(FILE* file, list_t* list){
             list->debugInfo.line);
 
     fprintf(file, "<p>capacity = %u</p>", list->capacity);
-    fprintf(file, "<p>head = %u</p>", list->head);
-    fprintf(file, "<p>tail = %u</p>", list->tail);
-    fprintf(file, "<p>free = %u</p>", list->free);
+    // fprintf(file, "<p>head = %u</p>", list->head);
+    // fprintf(file, "<p>tail = %u</p>", list->tail);
+    // fprintf(file, "<p>free = %u</p>", list->free);
 
-    fprintf(file, "<p>listArr [%p]: </p>", list->listArr);
+    fprintf(file, "</div>\n");
 
-    fprintf(file, "<table border=\"1\">");
-
-    printArr(file, list->listArr);
-
-    fprintf(file, "</table>\n");
+    fprintf(file, "</div>\n");
 
     addPictureIntoLog(file, list);
 
@@ -102,8 +108,12 @@ void printArr(FILE* file, listArrElem* arr){
 void printArrEl(FILE* file, const list_elem_t value){
 
     assert(file);
-
-    fprintf(file, "\t<td>%d</td>", value);
+    if(value == LIST_POISON){
+        fprintf(file, "\t<td>PZ</td>");
+    }
+    else{
+        fprintf(file, "\t<td>%d</td>", value);
+    }
 
     return;
 }
@@ -118,7 +128,7 @@ void addPictureIntoLog(FILE* file, list_t* list){
 
     createDebugImage(list, pictureName);
 
-    fprintf(file, "<img src='%s' width=2000px>", pictureName);
+    fprintf(file, "<img src='%s' width=3000px>", pictureName);
 }
 
 void printLinArr(FILE* file, const list_t* list){
@@ -147,6 +157,69 @@ void launchLogFile(const char* logFileName){
     system(systemStartLogCommand);
 
     return;
+}
+
+ErrorCode loadDump(const char* logFileName){
+
+    assert(logFileName);
+
+    FILE* file = fopen(logFileName, "a");
+    if (file == NULL) {
+        error_debug debugLogInfo = {};
+        ERROR_STRUCT_FORMAT(&debugLogInfo, __func__, __LINE__, "File-problem", ERR_FILE_NOT_FOUND);
+        printErrorIntoConsole(&debugLogInfo);
+        printf("Cannot open log file: %s\n", logFileName);
+
+        return ERR_FILE_NOT_FOUND;
+    }
+
+    fprintf(file, "<h3>DUMP. List was loaded</h3>\n");
+
+    FCLOSE(file);
+
+    return ERR_OK;
+}
+
+ErrorCode addDump(const char* logFileName, size_t indexAfter, list_elem_t elem){
+
+    assert(logFileName);
+
+    FILE* file = fopen(logFileName, "a");
+    if (file == NULL) {
+        error_debug debugLogInfo = {};
+        ERROR_STRUCT_FORMAT(&debugLogInfo, __func__, __LINE__, "File-problem", ERR_FILE_NOT_FOUND);
+        printErrorIntoConsole(&debugLogInfo);
+        printf("Cannot open log file: %s\n", logFileName);
+
+        return ERR_FILE_NOT_FOUND;
+    }
+
+    fprintf(file, "<h3>DUMP. Dump after ADD(%d) after index: %u</h3>\n", elem, indexAfter);
+
+    FCLOSE(file);
+
+    return ERR_OK;
+}
+
+ErrorCode deleteDump(const char* logFileName, list_elem_t elem){
+
+    assert(logFileName);
+
+    FILE* file = fopen(logFileName, "a");
+    if (file == NULL) {
+        error_debug debugLogInfo = {};
+        ERROR_STRUCT_FORMAT(&debugLogInfo, __func__, __LINE__, "File-problem", ERR_FILE_NOT_FOUND);
+        printErrorIntoConsole(&debugLogInfo);
+        printf("Cannot open log file: %s\n", logFileName);
+
+        return ERR_FILE_NOT_FOUND;
+    }
+
+    fprintf(file, "<h3>DUMP. Dump after DELETE(%d)</h3>\n", elem);
+
+    FCLOSE(file);
+
+    return ERR_OK;
 }
 
 #endif

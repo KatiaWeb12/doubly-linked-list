@@ -1,10 +1,11 @@
 #include "list.h"
 #include "graphics.cpp"
 #include "formLogs.cpp"
+#include "verify.cpp"
 
 int main(){
     #ifdef LIST_DEBUG
-    createLogSpace();
+        createLogSpace();
     #endif
 
     list_t list = {};
@@ -25,7 +26,7 @@ int main(){
     listDelElem(&list, 7);
 
     #ifdef LIST_DEBUG
-    launchLogFile("log.html");
+        launchLogFile("log.html");
     #endif
 }
 
@@ -50,7 +51,7 @@ ErrorCode listLoad(list_t* list, const size_t listCapacity){
     list->listArr[0].prev= 0;
 
     for(size_t i = 1; i < LIST_CAPACITY; i++){
-        list->listArr[0].value = LIST_POISON;
+        list->listArr[i].value = LIST_POISON;
         list->listArr[i].next = (i + 1 < listCapacity) ? (int)(i + 1) : 0;
         list->listArr[i].prev = -1;
     }
@@ -62,6 +63,7 @@ ErrorCode listLoad(list_t* list, const size_t listCapacity){
             __func__,
             __LINE__
         };
+        loadDump("log.html");
         htmlListDump("log.html", list);
     #endif
 
@@ -97,7 +99,8 @@ ErrorCode listAddElem(list_t* list, const size_t indexAfter, const list_elem_t v
     list->tail = list->listArr[0].prev;
 
     #ifdef LIST_DEBUG
-    htmlListDump("log.html", list);
+        addDump("log.html", indexAfter, value);
+        htmlListDump("log.html", list);
     #endif
 
     return ERR_OK;
@@ -144,11 +147,14 @@ ErrorCode listDelElem(list_t* list, const size_t indexDel){
     list->tail = list->listArr[0].prev;
 
     #ifdef LIST_DEBUG
-    htmlListDump("log.html", list);
+        list_elem_t deletingValue = list->listArr[indexDel].value;
+        deleteDump("log.html", deletingValue);
+        htmlListDump("log.html", list);
     #endif
 
     return ERR_OK;
 }
+
 
 
 
