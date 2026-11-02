@@ -1,11 +1,19 @@
 #ifdef LIST_DEBUG
 
+static ErrorCode formPicture(list_t* list);
+static void recordGraphicBlock(size_t num, listArrElem elem, FILE* file);
+static void createGraphicConnections(FILE* file, list_t* list);
+static void addEmptyArrow(FILE* file, list_t* list);
+static void recordOtherNodes(FILE* file, list_t* list);
+
+
 ErrorCode createDebugImage(list_t* list, char* pictureName){
 
     assert(list);
     assert(pictureName);
 
-    formPicture(list);
+    ErrorCode error = formPicture(list);
+    if (error != ERR_OK) return error;
 
     char createPictureSystemCommand[SYSTEM_COMMAND_MAX_LENGTH] = "dot graph.txt -Tpng -o ";
     strcat(createPictureSystemCommand, pictureName);
@@ -18,7 +26,7 @@ ErrorCode createDebugImage(list_t* list, char* pictureName){
 
 }
 
-ErrorCode formPicture(list_t* list){
+static ErrorCode formPicture(list_t* list){
 
     assert(list);
 
@@ -53,7 +61,7 @@ ErrorCode formPicture(list_t* list){
     return ERR_OK;
 }
 
-void recordGraphicBlock(size_t num, listArrElem elem, FILE* file){
+static void recordGraphicBlock(size_t num, listArrElem elem, FILE* file){
 
     assert(file);
 
@@ -81,7 +89,7 @@ void recordGraphicBlock(size_t num, listArrElem elem, FILE* file){
     return;
 }
 
-void createGraphicConnections(FILE* file, list_t* list){
+static void createGraphicConnections(FILE* file, list_t* list){
 
     assert(list);
 
@@ -107,15 +115,14 @@ void createGraphicConnections(FILE* file, list_t* list){
     }
 }
 
-void addEmptyArrow(FILE* file, list_t* list){
-    for(size_t i = 0; i < list->capacity-1; i++){
+static void addEmptyArrow(FILE* file, list_t* list){
 
-        fprintf(file, "\tnode%u -> node%d [style=invis, weight=100];\n", i + 1, i + 2);
+    for(size_t i = 0; i < list->capacity-1; i++)
+        fprintf(file, "\tnode%u -> node%d [style=invis, weight=300];\n", i + 1, i + 2);
 
-    }
 }
 
-void recordOtherNodes(FILE* file, list_t* list){
+static void recordOtherNodes(FILE* file, list_t* list){
 
     assert(file);
     assert(list);

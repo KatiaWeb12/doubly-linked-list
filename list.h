@@ -16,7 +16,8 @@ const size_t LIST_CAPACITY = 15;
 const size_t DIRECTORY_NAME_MAX_LENGTH = 50;
 const size_t PICTURE_NAME_MAX_LENGTH = 50;
 const size_t SYSTEM_COMMAND_MAX_LENGTH = 50;
-const size_t PROGRAM_CAPACITY = 500; // Можно ли?
+const size_t PROGRAM_CAPACITY = 500;
+const char LOG_FILENAME[] = "log.html";
 
 typedef int list_elem_t;
 
@@ -40,8 +41,12 @@ enum ListVerifyCode {
     LIST_INVALID_EXTRA_EL = 16
 };
 
-
-size_t logPictureNum = 0;
+enum ListVerifyLevel {
+    VERIFY_OFF = 0,
+    VERIFY_LIGHT = 1,
+    VERIFY_MEDIUM = 2,
+    VERIFY_FULL = 3
+};
 
 #ifdef LIST_DEBUG
 struct debugList_t {
@@ -49,6 +54,8 @@ struct debugList_t {
     const char* file;
     const char* function;
     size_t line;
+    size_t logPictureNum;
+
 };
 #endif
 
@@ -70,50 +77,46 @@ struct list_t {
 
     #ifdef LIST_DEBUG
         debugList_t debugInfo;
+        ListVerifyLevel verifyLevel;
+        FILE* logFilePtr;
     #endif
 };
 
 // Prototypes
 
-ErrorCode listLoad(list_t* list, const size_t listCapacity);
+ErrorCode listInit(list_t* list, const size_t listCapacity);
 
 //AddElem
-ErrorCode listAddElem(list_t* list, const size_t indexAfter, const list_elem_t value);
+size_t listAddElem(list_t* list, const size_t indexAfter, const list_elem_t value);
 size_t getFreeEl(list_t* list, ErrorCode* error);
 
 //DelElem
 ErrorCode listDelElem(list_t* list, const size_t indexDel);
 
+//DestroyList
+ErrorCode listDestroy(list_t* list);
+
 #ifdef LIST_DEBUG
 
 //Graphic
 ErrorCode createDebugImage(list_t* list, char* pictureName);
-ErrorCode formPicture(list_t* list);
-void recordGraphicBlock(size_t num, listArrElem elem, FILE* file);
-void createGraphicConnections(FILE* file, list_t* list);
-void addEmptyArrow(FILE* file, list_t* list);
-void recordOtherNodes(FILE* file, list_t* list);
 
 // Debug
-ErrorCode listDump(const list_t* list);
-void printArr(FILE* file, listArrElem* arr);
-void printArrEl(FILE* file, const list_elem_t value);
-void printLinArr(FILE* file, const list_t* list);
-void printDebugInfoIntoLogFile(FILE* file, list_t* list);
-ErrorCode htmlListDump(const char* logFileName, list_t* list);
-void createLogSpace();
-void addPictureIntoLog(FILE* file, list_t* list);
-void launchLogFile(const char* logFileName);
-ErrorCode loadDump(const char* logFileName);
-ErrorCode addDump(const char* logFileName, size_t indexAfter, list_elem_t elem);
-ErrorCode deleteDump(const char* logFileName, list_elem_t elem);
+ErrorCode createLogSpace(list_t* list);
+ErrorCode htmlListDump(list_t* list);
+void launchLogFile();
+ErrorCode dumpHeader(list_t* list);
+ErrorCode loadDump(list_t* list);
+ErrorCode addDump(list_t* list, size_t indexAfter, list_elem_t elem);
+ErrorCode deleteDump(list_t* list, list_elem_t elem);
+ErrorCode openLogFile(FILE** file);
 
 // Verify
-ListVerifyCode listVerify(const char* logFileName, const list_t* list);
-void printVerifyErrorIntoConsole(struct error_debug_verify* debugLogInfo);
+ListVerifyCode listVerify(const list_t* list, const char* funcName, int line);
+ErrorCode getVerifyLevel(int argc, char* argv[], list_t* list);
 
 
-#define ERROR_STRUCT_VERIFY_FORMAT(ptr, funcName, lineNum, codeValue) \
+#define ERROR_STRUCT_VERIFY_FORMAT(ptr, funcName, lineNum, codeValue)    \
     do {                                                                 \
         char timeString[32] = {};                                        \
         (ptr)->time = getOperationTime(timeString, sizeof(timeString));  \
@@ -122,5 +125,14 @@ void printVerifyErrorIntoConsole(struct error_debug_verify* debugLogInfo);
         (ptr)->line = (lineNum);                                         \
         (ptr)->errCode = (codeValue);                                    \
     } while (0)
+
+
+#define VERIFY_OK(list, function)                                      \
+    do {                                                               \
+        if (listVerify((list), (function), __LINE__) != LIST_OK) {     \
+            listDestroy((list));                                       \
+            abort();                                                   \
+        }                                                              \
+    } while (0)                                                        \
 
 #endif

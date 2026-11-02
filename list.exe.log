@@ -1126,3 +1126,259 @@ Run file:	C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe
 Directory:	C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\log_31.10.2026_23-16-43
 
 --------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe,
+
+ВНЕЗАПНО: signal (22, 0x00): SIGABRT: Аварийное завершение программы, вызвана функция abort(). 
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#1: TXLib [Ver: 00173a, Rev: 175, Date: 2025-12-31 23:02:50 +0400], Instance: 0x005121E4 (32-bit), Flags: Cmdre0, Thread: 0x1CB8 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00414FFE in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: (anonymous namespace)::TX::_txOnSignal() at C:/Users/Kate/Desktop/downloads/TX/TXLib.h:11343
+# 1 0x76DD8F03 in C:\WINDOWS\System32\msvcrt.dll: raise()
+# 2 0x76DDD3CB in C:\WINDOWS\System32\msvcrt.dll: abort()
+# 3 0x76DD9D47 in C:\WINDOWS\System32\msvcrt.dll: assert()
+
+# 4 0x0043721B in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: listVerify() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/verify.cpp:16:
+
+     14: 
+     15:     FILE* file = fopen("list.html", "a");
+=>   16:     assert(file == NULL);
+     17: 
+     18:     error_debug_verify debugLogInfo = {};
+
+# 5 0x00437C0C in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: listLoad() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/list.cpp:73:
+
+     71:         htmlListDump("log.html", list);
+     72: 
+=>   73:         listVerify(list);
+     74:     #endif
+     75: 
+
+# 6 0x004378E4 in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: main() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/list.cpp:17:
+
+     15:     #endif
+     16: 
+=>   17:     listLoad(&list, LIST_CAPACITY);
+     18: 
+     19:     listAddElem(&list, 0, 10);
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 175, Date: 2025-12-31 23:02:50 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Kate\Desktop\downloads\TX\TXLib.h
+Compiled:	Nov  2 2026 22:16:18, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Nov 02 2026 22:16:22
+
+Run file:	C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe
+Directory:	C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\log_02.11.2026_22-16-22
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe,
+
+ВНЕЗАПНО: Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x0043776E в функции getVerifyLevel() в файле C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/verify.cpp на строке 210. Попытка прочесть данные по адресу NULL в модуле C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 175, Date: 2025-12-31 23:02:50 +0400], Instance: 0x005121E4 (32-bit), Flags: Cmdre0, Thread: 0x4874 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0043776E in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: getVerifyLevel() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/verify.cpp:210:
+
+    208:     long level = strtol(argv[1], &end, 10);
+    209: 
+=>  210:     if (*end != '\0' || level < VERIFY_LIGHT || level > VERIFY_FULL) {
+    211:         printf("Invalid verification level: %s\n", argv[1]);
+    212:         return ERR_INVALID_ARGUMENT;
+
+# 1 0x00437864 in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: main() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/list.cpp:13:
+
+     11:         createLogSpace();
+     12: 
+=>   13:         getVerifyLevel(argc, argv, &list);
+     14:         if (getVerifyLevel(argc, argv, &list) != ERR_OK) return 1;
+     15:     #endif
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 175, Date: 2025-12-31 23:02:50 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Kate\Desktop\downloads\TX\TXLib.h
+Compiled:	Nov  2 2026 22:19:01, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Nov 02 2026 22:19:31
+
+Run file:	C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe
+Directory:	C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\log_02.11.2026_22-19-31
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe,
+
+ВНЕЗАПНО: signal (11, 0x00): SIGSEGV: Доступ по неверному указателю. Ставьте ассерты! 
+
+Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x0043776E в функции getVerifyLevel() в файле C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/verify.cpp на строке 210. Попытка прочесть данные по адресу NULL в модуле C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 175, Date: 2025-12-31 23:02:50 +0400], Instance: 0x005121E4 (32-bit), Flags: Cmdre0, Thread: 0x4874 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0043776E in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: getVerifyLevel() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/verify.cpp:210:
+
+    208:     long level = strtol(argv[1], &end, 10);
+    209: 
+=>  210:     if (*end != '\0' || level < VERIFY_LIGHT || level > VERIFY_FULL) {
+    211:         printf("Invalid verification level: %s\n", argv[1]);
+    212:         return ERR_INVALID_ARGUMENT;
+
+# 1 0x00437864 in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: main() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/list.cpp:13:
+
+     11:         createLogSpace();
+     12: 
+=>   13:         getVerifyLevel(argc, argv, &list);
+     14:         if (getVerifyLevel(argc, argv, &list) != ERR_OK) return 1;
+     15:     #endif
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 175, Date: 2025-12-31 23:02:50 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Kate\Desktop\downloads\TX\TXLib.h
+Compiled:	Nov  2 2026 22:19:01, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Nov 02 2026 22:19:31
+
+Run file:	C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe
+Directory:	C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\log_02.11.2026_22-19-31
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe,
+
+ВНЕЗАПНО: Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x0043776E в функции getVerifyLevel() в файле C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/verify.cpp на строке 210. Попытка прочесть данные по адресу NULL в модуле C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 175, Date: 2025-12-31 23:02:50 +0400], Instance: 0x005121E4 (32-bit), Flags: Cmdre0, Thread: 0x5890 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0043776E in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: getVerifyLevel() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/verify.cpp:210:
+
+    208:                 "2 - MEDIUM\n"
+    209:                 "3 - FULL\n",
+=>  210:                 argv[0]);
+    211:         return ERR_INVALID_ARGUMENT;
+    212:     }
+
+# 1 0x00437864 in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: main() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/list.cpp:13:
+
+     11:         createLogSpace();
+     12: 
+=>   13:         getVerifyLevel(argc, argv, &list);
+     14:         if (getVerifyLevel(argc, argv, &list) != ERR_OK) return 1;
+     15:     #endif
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 175, Date: 2025-12-31 23:02:50 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Kate\Desktop\downloads\TX\TXLib.h
+Compiled:	Nov  2 2026 22:19:01, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Nov 02 2026 22:24:29
+
+Run file:	C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe
+Directory:	C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\log_02.11.2026_22-24-29
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe,
+
+ВНЕЗАПНО: signal (11, 0x00): SIGSEGV: Доступ по неверному указателю. Ставьте ассерты! 
+
+Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x0043776E в функции getVerifyLevel() в файле C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/verify.cpp на строке 210. Попытка прочесть данные по адресу NULL в модуле C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 175, Date: 2025-12-31 23:02:50 +0400], Instance: 0x005121E4 (32-bit), Flags: Cmdre0, Thread: 0x5890 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0043776E in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: getVerifyLevel() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/verify.cpp:210:
+
+    208:                 "2 - MEDIUM\n"
+    209:                 "3 - FULL\n",
+=>  210:                 argv[0]);
+    211:         return ERR_INVALID_ARGUMENT;
+    212:     }
+
+# 1 0x00437864 in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: main() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/list.cpp:13:
+
+     11:         createLogSpace();
+     12: 
+=>   13:         getVerifyLevel(argc, argv, &list);
+     14:         if (getVerifyLevel(argc, argv, &list) != ERR_OK) return 1;
+     15:     #endif
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 175, Date: 2025-12-31 23:02:50 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Kate\Desktop\downloads\TX\TXLib.h
+Compiled:	Nov  2 2026 22:19:01, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Nov 02 2026 22:24:29
+
+Run file:	C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe
+Directory:	C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\log_02.11.2026_22-24-29
+
+--------------------------------------------------

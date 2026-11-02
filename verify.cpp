@@ -1,5 +1,7 @@
 #ifdef LIST_DEBUG
 
+static void printVerifyErrorIntoLog(FILE* logFile, struct error_debug_verify* debugLogInfo);
+
 struct error_debug_verify {
     const char* time;
     const char* file;
@@ -8,191 +10,220 @@ struct error_debug_verify {
     ListVerifyCode errCode;
 };
 
-ListVerifyCode listVerify(const char* logFileName, const list_t* list){
-
-    FILE* file = fopen(logFileName, "a");
-    assert(file == NULL);
+ListVerifyCode listVerify(const list_t* list, const char* funcName, int line){
 
     error_debug_verify debugLogInfo = {};
-    ERROR_STRUCT_VERIFY_FORMAT(&debugLogInfo, __func__, __LINE__, LIST_OK);
+    ERROR_STRUCT_VERIFY_FORMAT(&debugLogInfo, funcName, line, LIST_OK);
 
-    if(list == NULL){
+    ListVerifyLevel verifyLevel = list->verifyLevel;
+    if(verifyLevel == VERIFY_OFF) return LIST_OK;
 
-        debugLogInfo.errCode = LIST_NULL;
-         printVerifyErrorIntoConsole(&debugLogInfo);
-        return LIST_NULL;
-    }
+    if(list == NULL) return LIST_NULL;
+
+    FILE* logFile = list->logFilePtr;
+
     if(list->listArr == NULL){
 
         debugLogInfo.errCode = LIST_NULL_ARRAY;
-         printVerifyErrorIntoConsole(&debugLogInfo);
+        printVerifyErrorIntoLog(logFile, &debugLogInfo);
         return LIST_NULL_ARRAY;
     }
     if(list->capacity <= 1){
 
         debugLogInfo.errCode = LIST_INVALID_CAPACITY;
-         printVerifyErrorIntoConsole(&debugLogInfo);
+        printVerifyErrorIntoLog(logFile, &debugLogInfo);
         return LIST_INVALID_CAPACITY;
     }
     if(list->head > list->capacity){
 
         debugLogInfo.errCode = LIST_INVALID_HEAD;
-         printVerifyErrorIntoConsole(&debugLogInfo);
+        printVerifyErrorIntoLog(logFile, &debugLogInfo);
         return LIST_INVALID_HEAD;
     }
     if(list->tail > list->capacity){
 
         debugLogInfo.errCode = LIST_INVALID_TAIL;
-         printVerifyErrorIntoConsole(&debugLogInfo);
+        printVerifyErrorIntoLog(logFile, &debugLogInfo);
         return LIST_INVALID_TAIL;
     }
-    if(list->tail > list->capacity){
+    if (verifyLevel >= VERIFY_MEDIUM){
 
-        debugLogInfo.errCode = LIST_INVALID_FREE;
-         printVerifyErrorIntoConsole(&debugLogInfo);
-        return LIST_INVALID_FREE;
-    }
-    if(list->listArr[0].value != LIST_POISON){
+        if(list->listArr[0].value != LIST_POISON){
 
-        debugLogInfo.errCode = LIST_INVALID_EXTRA_EL;
-         printVerifyErrorIntoConsole(&debugLogInfo);
-        return LIST_INVALID_EXTRA_EL;
-    }
-    if(list->listArr[0].next != (list_elem_t)list->head){
+            debugLogInfo.errCode = LIST_INVALID_EXTRA_EL;
+            printVerifyErrorIntoLog(logFile, &debugLogInfo);
+            return LIST_INVALID_EXTRA_EL;
+        }
+        if(list->listArr[0].next != (int)list->head){
+            debugLogInfo.errCode = LIST_INVALID_EXTRA_EL;
+            printVerifyErrorIntoLog(logFile, &debugLogInfo);
+            return LIST_INVALID_EXTRA_EL;
+        }
+        if(list->listArr[0].prev != (int)list->tail){
 
-        debugLogInfo.errCode = LIST_INVALID_EXTRA_EL;
-         printVerifyErrorIntoConsole(&debugLogInfo);
-        return LIST_INVALID_EXTRA_EL;
-    }
-    if(list->listArr[0].prev != (list_elem_t)list->tail){
-
-        debugLogInfo.errCode = LIST_INVALID_EXTRA_EL;
-         printVerifyErrorIntoConsole(&debugLogInfo);
-        return LIST_INVALID_EXTRA_EL;
+            debugLogInfo.errCode = LIST_INVALID_EXTRA_EL;
+            printVerifyErrorIntoLog(logFile, &debugLogInfo);
+            return LIST_INVALID_EXTRA_EL;
+        }
     }
 
-    size_t activeCount = 0;
-    size_t currentElem = list->head;
-    size_t myPrev = 0;
+    if (verifyLevel >= VERIFY_FULL){
 
-    while(currentElem != 0){
+        size_t activeCount = 0;
+        size_t currentElem = list->head;
+        size_t myPrev = 0;
 
-        activeCount++;
+        while(currentElem != 0){
 
-        if(activeCount >= list->capacity){
+            activeCount++;
 
-            debugLogInfo.errCode = LIST_CYCLE;
-             printVerifyErrorIntoConsole(&debugLogInfo);
-            return LIST_CYCLE;
+            if(activeCount >= list->capacity){
+
+                debugLogInfo.errCode = LIST_CYCLE;
+                printVerifyErrorIntoLog(logFile, &debugLogInfo);
+                return LIST_CYCLE;
+            }
+            if(currentElem >= list->capacity){
+
+                debugLogInfo.errCode = LIST_INVALID_NEXT;
+                printVerifyErrorIntoLog(logFile, &debugLogInfo);
+                return LIST_INVALID_NEXT;
+            }
+
+            listArrElem activeElem = list->listArr[currentElem];
+            if(activeElem.value == LIST_POISON){
+
+                debugLogInfo.errCode = LIST_ACTIVE_POISON;
+                printVerifyErrorIntoLog(logFile, &debugLogInfo);
+                return LIST_ACTIVE_POISON;
+            }
+            if((activeElem.prev < 0 || (size_t)activeElem.prev >= list->capacity)){
+
+                debugLogInfo.errCode = LIST_INVALID_PREV;
+                printVerifyErrorIntoLog(logFile, &debugLogInfo);
+                return LIST_INVALID_PREV;
+            }
+            if(activeElem.next < 0 || (size_t)activeElem.next >= list->capacity){
+
+                debugLogInfo.errCode = LIST_INVALID_NEXT;
+                printVerifyErrorIntoLog(logFile, &debugLogInfo);
+                return LIST_INVALID_NEXT;
+            }
+            if(list->listArr[myPrev].next != (int)currentElem){
+
+                debugLogInfo.errCode = LIST_BAD_PREV_NEXT;
+                printVerifyErrorIntoLog(logFile, &debugLogInfo);
+                return LIST_BAD_PREV_NEXT;
+            }
+            if(list->listArr[activeElem.next].prev != (int)currentElem){
+
+                debugLogInfo.errCode = LIST_BAD_NEXT_PREV;
+                printVerifyErrorIntoLog(logFile, &debugLogInfo);
+                return LIST_BAD_NEXT_PREV;
+            }
+
+            myPrev = currentElem;
+            currentElem = (list_elem_t)activeElem.next;
         }
-        if(currentElem >= list->capacity){
+        if(myPrev != list->tail){
 
-            debugLogInfo.errCode = LIST_INVALID_NEXT;
-             printVerifyErrorIntoConsole(&debugLogInfo);
-            return LIST_INVALID_NEXT;
+                debugLogInfo.errCode = LIST_INVALID_TAIL;
+                printVerifyErrorIntoLog(logFile, &debugLogInfo);
+                return LIST_INVALID_TAIL;
         }
 
-        listArrElem activeElem = list->listArr[currentElem];
-        if(activeElem.value == LIST_POISON){
+        currentElem = list->free;
+        size_t freeCount = 0;
 
-            debugLogInfo.errCode = LIST_ACTIVE_POISON;
-             printVerifyErrorIntoConsole(&debugLogInfo);
-            return LIST_ACTIVE_POISON;
+        while(currentElem != 0){
+
+            freeCount++;
+
+            if(freeCount >= list->capacity){
+
+                debugLogInfo.errCode = LIST_CYCLE;
+                printVerifyErrorIntoLog(logFile, &debugLogInfo);
+                return LIST_FREE_CYCLE;
+            }
+            if(currentElem >= list->capacity){
+
+                debugLogInfo.errCode = LIST_INVALID_NEXT;
+                printVerifyErrorIntoLog(logFile, &debugLogInfo);
+                return LIST_INVALID_FREE;
+            }
+
+            listArrElem elemFree = list->listArr[currentElem];
+
+            if(elemFree.prev != -1){
+
+                debugLogInfo.errCode = LIST_INVALID_FREE;
+                printVerifyErrorIntoLog(logFile, &debugLogInfo);
+                return LIST_INVALID_FREE;
+            }
+            if(elemFree.value != LIST_POISON){
+
+                debugLogInfo.errCode = LIST_INVALID_FREE;
+                printVerifyErrorIntoLog(logFile, &debugLogInfo);
+                return LIST_INVALID_FREE;
+            }
+            if(elemFree.next < 0 || elemFree.next >= (int)list->capacity){
+
+                debugLogInfo.errCode = LIST_INVALID_NEXT;
+                printVerifyErrorIntoLog(logFile, &debugLogInfo);
+                return LIST_INVALID_NEXT;
+            }
+
+            currentElem = (size_t)elemFree.next;
         }
-        if((activeElem.prev < 0 || (size_t)activeElem.prev >= list->capacity)){
 
-            debugLogInfo.errCode = LIST_INVALID_PREV;
-             printVerifyErrorIntoConsole(&debugLogInfo);
-            return LIST_INVALID_PREV;
+        if (activeCount + freeCount != list->capacity - 1){
+
+            debugLogInfo.errCode = LIST_LOST_ELEMENT;
+            printVerifyErrorIntoLog(logFile, &debugLogInfo);
+            return LIST_LOST_ELEMENT;
         }
-        if(activeElem.next < 0 || (size_t)activeElem.next >= list->capacity){
-
-            debugLogInfo.errCode = LIST_INVALID_NEXT;
-             printVerifyErrorIntoConsole(&debugLogInfo);
-            return LIST_INVALID_NEXT;
-        }
-        if(list->listArr[myPrev].next == (int)currentElem){
-
-            debugLogInfo.errCode = LIST_BAD_PREV_NEXT;
-             printVerifyErrorIntoConsole(&debugLogInfo);
-            return LIST_BAD_PREV_NEXT;
-        }
-        if(list->listArr[activeElem.next].prev == (int)currentElem){
-
-            debugLogInfo.errCode = LIST_BAD_NEXT_PREV;
-             printVerifyErrorIntoConsole(&debugLogInfo);
-            return LIST_BAD_NEXT_PREV;
-        }
-
-        myPrev = currentElem;
-        currentElem = (list_elem_t)activeElem.next;
     }
-    if(myPrev != list->tail){
-
-            debugLogInfo.errCode = LIST_INVALID_TAIL;
-             printVerifyErrorIntoConsole(&debugLogInfo);
-            return LIST_INVALID_TAIL;
-    }
-
-    currentElem = list->free;
-    size_t freeCount = 0;
-
-    while(currentElem != 0){
-
-        freeCount++;
-
-        if(freeCount >= list->capacity){
-
-            debugLogInfo.errCode = LIST_CYCLE;
-             printVerifyErrorIntoConsole(&debugLogInfo);
-            return LIST_FREE_CYCLE;
-        }
-        if(currentElem >= list->capacity){
-
-            debugLogInfo.errCode = LIST_INVALID_NEXT;
-             printVerifyErrorIntoConsole(&debugLogInfo);
-            return LIST_INVALID_FREE;
-        }
-
-        listArrElem elemFree = list->listArr[currentElem];
-
-        if(elemFree.prev != -1){
-
-            debugLogInfo.errCode = LIST_INVALID_FREE;
-             printVerifyErrorIntoConsole(&debugLogInfo);
-            return LIST_INVALID_FREE;
-        }
-        if(elemFree.value != LIST_POISON){
-
-            debugLogInfo.errCode = LIST_INVALID_FREE;
-             printVerifyErrorIntoConsole(&debugLogInfo);
-            return LIST_INVALID_FREE;
-        }
-        if(elemFree.next < 0 || elemFree.next >= (int)list->capacity){
-
-            debugLogInfo.errCode = LIST_INVALID_NEXT;
-             printVerifyErrorIntoConsole(&debugLogInfo);
-            return LIST_INVALID_NEXT;
-        }
-
-        currentElem = (size_t)elemFree.next;
-    }
-
-    if (activeCount + freeCount != list->capacity - 1){
-
-        debugLogInfo.errCode = LIST_LOST_ELEMENT;
-         printVerifyErrorIntoConsole(&debugLogInfo);
-        return LIST_LOST_ELEMENT;
-    }
-
     return LIST_OK;
 }
 
-void printVerifyErrorIntoConsole(struct error_debug_verify* debugLogInfo) {
+ErrorCode getVerifyLevel(int argc, char* argv[], list_t* list){
+
+    assert(argv);
+    assert(list);
+
+    if (argc == 1) {
+
+        list->verifyLevel = VERIFY_OFF;
+        return ERR_OK;
+    }
+
+    if (argc != 2) {
+        printf("Usage: %s <verify_level>\n"
+                "1 - LIGHT\n"
+                "2 - MEDIUM\n"
+                "3 - FULL\n",
+                argv[0]);
+        return ERR_INVALID_ARGUMENT;
+    }
+
+    char* end = nullptr;
+    long level = strtol(argv[1], &end, 10);
+
+    if (*end != '\0' || level < VERIFY_LIGHT || level > VERIFY_FULL) {
+        printf("Invalid verification level\n");
+        return ERR_INVALID_ARGUMENT;
+    }
+
+    list->verifyLevel = (ListVerifyLevel)level;
+
+    return ERR_OK;
+}
+
+static void printVerifyErrorIntoLog(FILE* logFile, struct error_debug_verify* debugLogInfo){
 
     assert(debugLogInfo);
 
-    printf("[%s] Function '%s' was completed with Error %d in file '%s' in line %d \n",
+    fprintf(logFile, "<h2>[%s] Function '%s' was completed with Error %d in file '%s' in line %d </h2>\n",
             debugLogInfo->time,
             debugLogInfo->function,
             debugLogInfo->errCode,

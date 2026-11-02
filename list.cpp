@@ -3,34 +3,39 @@
 #include "formLogs.cpp"
 #include "verify.cpp"
 
-int main(){
-    #ifdef LIST_DEBUG
-        createLogSpace();
-    #endif
+int main(int argc, char* argv[]){
 
     list_t list = {};
 
-    listLoad(&list, LIST_CAPACITY);
+    #ifdef LIST_DEBUG
+        createLogSpace(&list);
 
-    listAddElem(&list, 0, 10);
-    listAddElem(&list, 1, 20);
-    listAddElem(&list, 2, 30);
-    listAddElem(&list, 3, 40);
-    listAddElem(&list, 4, 50);
-    listAddElem(&list, 5, 60);
-    listAddElem(&list, 6, 70);
-    listAddElem(&list, 7, 80);
-    listAddElem(&list, 8, 90);
+        if (getVerifyLevel(argc, argv, &list) != ERR_OK) return 1;
+    #endif
 
-    listAddElem(&list, 3, 35);
+    listInit(&list, LIST_CAPACITY);
+
+    size_t addedIndex = 0;
+
+    addedIndex = listAddElem(&list, 0, 10);
+    addedIndex = listAddElem(&list, addedIndex, 20);
+    addedIndex = listAddElem(&list, addedIndex, 30);
+    addedIndex = listAddElem(&list, addedIndex, 40);
+    addedIndex = listAddElem(&list, addedIndex, 50);
+    addedIndex = listAddElem(&list, addedIndex, 60);
+    addedIndex = listAddElem(&list, addedIndex, 70);
+    addedIndex = listAddElem(&list, addedIndex, 80);
+    addedIndex = listAddElem(&list, addedIndex, 90);
+
+    addedIndex = listAddElem(&list, 3, 35);
     listDelElem(&list, 7);
 
     #ifdef LIST_DEBUG
-        launchLogFile("log.html");
+        launchLogFile();
     #endif
 }
 
-ErrorCode listLoad(list_t* list, const size_t listCapacity){
+ErrorCode listInit(list_t* list, const size_t listCapacity){
 
     list->capacity = listCapacity;
     list->head = 0;
@@ -57,29 +62,31 @@ ErrorCode listLoad(list_t* list, const size_t listCapacity){
     }
 
     #ifdef LIST_DEBUG
-        list->debugInfo = {
-            "ListData",
-            __FILE__,
-            __func__,
-            __LINE__
-        };
-        loadDump("log.html");
-        htmlListDump("log.html", list);
+        list->debugInfo = {};
+        list->debugInfo.name = "ListData";
+        list->debugInfo.file = __FILE__;
+        list->debugInfo.function = __func__;
+        list->debugInfo.line = __LINE__;
+        list->debugInfo.logPictureNum = 0;
+        loadDump(list);
+        htmlListDump(list);
+
+        VERIFY_OK(list, __func__);
     #endif
 
     return ERR_OK;
 
 }
 
-ErrorCode listAddElem(list_t* list, const size_t indexAfter, const list_elem_t value){
+size_t listAddElem(list_t* list, const size_t indexAfter, const list_elem_t value){
 
     assert(list);
 
-    if (indexAfter > list->capacity){
+    if (indexAfter >= list->capacity){
         error_debug debugLogInfo = {};
         ERROR_STRUCT_FORMAT(&debugLogInfo, __func__, __LINE__, "indexAfter incorrect", ERR_OUT_OF_MEMORY);
         printErrorIntoConsole(&debugLogInfo);
-        return ERR_INVALID_ARGUMENT;
+        abort();
     }
 
     ErrorCode error = ERR_OK;
@@ -99,11 +106,13 @@ ErrorCode listAddElem(list_t* list, const size_t indexAfter, const list_elem_t v
     list->tail = list->listArr[0].prev;
 
     #ifdef LIST_DEBUG
-        addDump("log.html", indexAfter, value);
-        htmlListDump("log.html", list);
+        addDump(list, indexAfter, value);
+        htmlListDump(list);
+
+        VERIFY_OK(list, __func__);
     #endif
 
-    return ERR_OK;
+    return emptyIndex;
 }
 
 size_t getFreeEl(list_t* list, ErrorCode* error){
@@ -134,6 +143,8 @@ ErrorCode listDelElem(list_t* list, const size_t indexDel){
     size_t prevIndex = list->listArr[indexDel].prev;
     size_t nextIndex = list->listArr[indexDel].next;
 
+    list_elem_t deletingValue = list->listArr[indexDel].value;
+
     list->listArr[prevIndex].next = list->listArr[indexDel].next;
     list->listArr[nextIndex].prev = list->listArr[indexDel].prev;
 
@@ -147,9 +158,38 @@ ErrorCode listDelElem(list_t* list, const size_t indexDel){
     list->tail = list->listArr[0].prev;
 
     #ifdef LIST_DEBUG
-        list_elem_t deletingValue = list->listArr[indexDel].value;
-        deleteDump("log.html", deletingValue);
-        htmlListDump("log.html", list);
+        deleteDump(list,deletingValue);
+        htmlListDump(list);
+
+        VERIFY_OK(list, __func__);
+    #endif
+
+    return ERR_OK;
+}
+
+ErrorCode listDestroy(list_t* list) {
+
+    assert(list);
+
+    #ifdef LIST_DEBUG
+        if (list->logFilePtr != NULL) {
+
+            FCLOSE(list->logFilePtr);
+            list->logFilePtr = NULL;
+        }
+    #endif
+
+    free(list->listArr);
+    list->listArr = NULL;
+
+    list->capacity = 0;
+    list->head = 0;
+    list->tail = 0;
+    list->free = 0;
+
+    #ifdef LIST_DEBUG
+        list->debugInfo = {};
+        list->verifyLevel = VERIFY_OFF;
     #endif
 
     return ERR_OK;

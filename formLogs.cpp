@@ -1,6 +1,14 @@
+#include <cstdlib>
+
+static void printDebugInfoIntoLogFile(FILE* file, list_t* list);
+static void printArr(FILE* file, listArrElem* arr);
+static void printArrEl(FILE* file, const list_elem_t value);
+static void printLinArr(FILE* file, const list_t* list);
+static void addPictureIntoLog(FILE* file, list_t* list);
+
 #ifdef LIST_DEBUG
 
-void createLogSpace(){
+ErrorCode createLogSpace(list_t* list){
 
     char timeBuffer[DIRECTORY_NAME_MAX_LENGTH] = "";
     getOperationTime(timeBuffer, DIRECTORY_NAME_MAX_LENGTH);
@@ -13,48 +21,50 @@ void createLogSpace(){
 
     system(directoryCreationCommand);
     _chdir(directoryName);
+
+    FILE* file = NULL;
+    ErrorCode error = openLogFile(&file);
+    if(error != ERR_OK) {
+        error_debug debugLogInfo = {};
+        ERROR_STRUCT_FORMAT(&debugLogInfo, __func__, __LINE__, "", error);
+        printErrorIntoConsole(&debugLogInfo);
+        return error;
+    };
+
+    list->logFilePtr = file;
+
+    return ERR_OK;
 }
 
-ErrorCode htmlListDump(const char* logFileName, list_t* list){
+ErrorCode htmlListDump(list_t* list){
 
-    assert(logFileName);
     assert(list);
 
-    FILE* file = fopen(logFileName, "a");
-    if (file == NULL) {
-        error_debug debugLogInfo = {};
-        ERROR_STRUCT_FORMAT(&debugLogInfo, __func__, __LINE__, "File-problem", ERR_FILE_NOT_FOUND);
-        printErrorIntoConsole(&debugLogInfo);
-        printf("Cannot open log file: %s\n", logFileName);
-
-        return ERR_FILE_NOT_FOUND;
-    }
+    FILE* file = list->logFilePtr;
 
     fprintf(file, "<link rel=\"stylesheet\" href=\"../styles.css\">");
     fprintf(file, "<pre>\n");
 
     printDebugInfoIntoLogFile(file, list);
 
-    FCLOSE(file);
-
     return ERR_OK;
 }
 
-void printDebugInfoIntoLogFile(FILE* file, list_t* list){
+static void printDebugInfoIntoLogFile(FILE* file, list_t* list){
 
     assert(list);
     assert(file);
 
-    fprintf(file, "<div class=\"table-text\">\n");
-
-    fprintf(file, "<table border=\"1\">");
-    fprintf(file, "<caption>listArr [%p]: </caption>", list->listArr);
+    fprintf(file, "<div class=\"table-text\">\n"
+                    "<table border=\"1\">"
+                    "<caption>listArr [%p]: </caption>",
+                    list->listArr);
 
     printArr(file, list->listArr);
 
-    fprintf(file, "</table>\n");
+    fprintf(file, "</table>\n"
+                  "<div class=\"info\">\n");
 
-    fprintf(file, "<div class=\"info\">\n");
     fprintf(file, "<p>\nlist_t '%s'[%p] created by %s() at %s:%u</p>",
             list->debugInfo.name,
             list,
@@ -67,9 +77,7 @@ void printDebugInfoIntoLogFile(FILE* file, list_t* list){
     // fprintf(file, "<p>tail = %u</p>", list->tail);
     // fprintf(file, "<p>free = %u</p>", list->free);
 
-    fprintf(file, "</div>\n");
-
-    fprintf(file, "</div>\n");
+    fprintf(file, "</div>\n</div>\n");
 
     addPictureIntoLog(file, list);
 
@@ -78,7 +86,7 @@ void printDebugInfoIntoLogFile(FILE* file, list_t* list){
     return;
 }
 
-void printArr(FILE* file, listArrElem* arr){
+static void printArr(FILE* file, listArrElem* arr){
 
     assert(arr);
     assert(file);
@@ -105,7 +113,7 @@ void printArr(FILE* file, listArrElem* arr){
 
 }
 
-void printArrEl(FILE* file, const list_elem_t value){
+static void printArrEl(FILE* file, const list_elem_t value){
 
     assert(file);
     if(value == LIST_POISON){
@@ -118,20 +126,20 @@ void printArrEl(FILE* file, const list_elem_t value){
     return;
 }
 
-void addPictureIntoLog(FILE* file, list_t* list){
+static void addPictureIntoLog(FILE* file, list_t* list){
 
     assert(file);
     assert(list);
 
     char pictureName[PICTURE_NAME_MAX_LENGTH] = "";
-    sprintf(pictureName, "graph%u.png", ++logPictureNum);
+    sprintf(pictureName, "graph%u.png", ++(list->debugInfo.logPictureNum));
 
     createDebugImage(list, pictureName);
 
     fprintf(file, "<img src='%s' width=3000px>", pictureName);
 }
 
-void printLinArr(FILE* file, const list_t* list){
+static void printLinArr(FILE* file, const list_t* list){
 
     assert(list);
     assert(file);
@@ -147,79 +155,106 @@ void printLinArr(FILE* file, const list_t* list){
     fprintf(file, "</p>\n");
 }
 
-void launchLogFile(const char* logFileName){
-
-    assert(logFileName);
+void launchLogFile(){
 
     char systemStartLogCommand[SYSTEM_COMMAND_MAX_LENGTH] = "";
-    sprintf(systemStartLogCommand, "start \"\" \"%s\"", logFileName);
+    sprintf(systemStartLogCommand, "start \"\" \"%s\"", LOG_FILENAME);
 
     system(systemStartLogCommand);
 
     return;
 }
 
-ErrorCode loadDump(const char* logFileName){
+ErrorCode dumpHeader(list_t* list){
 
-    assert(logFileName);
+    assert(list);
 
-    FILE* file = fopen(logFileName, "a");
+    FILE* file = list->logFilePtr;
     if (file == NULL) {
         error_debug debugLogInfo = {};
         ERROR_STRUCT_FORMAT(&debugLogInfo, __func__, __LINE__, "File-problem", ERR_FILE_NOT_FOUND);
         printErrorIntoConsole(&debugLogInfo);
-        printf("Cannot open log file: %s\n", logFileName);
+
+        return ERR_FILE_NOT_FOUND;
+    }
+
+    char timeString[32] = {};                                        \
+    getOperationTime(timeString, sizeof(timeString));
+
+    fprintf(file, "<h3>DUMP [%s]-----------------------------</h3>\n", timeString);
+
+    return ERR_OK;
+}
+
+ErrorCode loadDump(list_t* list){
+
+    assert(list);
+
+    FILE* file = list->logFilePtr;
+    if (file == NULL) {
+        error_debug debugLogInfo = {};
+        ERROR_STRUCT_FORMAT(&debugLogInfo, __func__, __LINE__, "File-problem", ERR_FILE_NOT_FOUND);
+        printErrorIntoConsole(&debugLogInfo);
 
         return ERR_FILE_NOT_FOUND;
     }
 
     fprintf(file, "<h3>DUMP. List was loaded</h3>\n");
 
-    FCLOSE(file);
-
     return ERR_OK;
 }
 
-ErrorCode addDump(const char* logFileName, size_t indexAfter, list_elem_t elem){
+ErrorCode addDump(list_t* list, size_t indexAfter, list_elem_t elem){
 
-    assert(logFileName);
+    assert(list);
 
-    FILE* file = fopen(logFileName, "a");
+    FILE* file = list->logFilePtr;
     if (file == NULL) {
         error_debug debugLogInfo = {};
         ERROR_STRUCT_FORMAT(&debugLogInfo, __func__, __LINE__, "File-problem", ERR_FILE_NOT_FOUND);
         printErrorIntoConsole(&debugLogInfo);
-        printf("Cannot open log file: %s\n", logFileName);
 
         return ERR_FILE_NOT_FOUND;
     }
 
     fprintf(file, "<h3>DUMP. Dump after ADD(%d) after index: %u</h3>\n", elem, indexAfter);
 
-    FCLOSE(file);
-
     return ERR_OK;
 }
 
-ErrorCode deleteDump(const char* logFileName, list_elem_t elem){
+ErrorCode deleteDump(list_t* list, list_elem_t elem){
 
-    assert(logFileName);
+    assert(list);
 
-    FILE* file = fopen(logFileName, "a");
+    FILE* file = list->logFilePtr;
     if (file == NULL) {
         error_debug debugLogInfo = {};
         ERROR_STRUCT_FORMAT(&debugLogInfo, __func__, __LINE__, "File-problem", ERR_FILE_NOT_FOUND);
         printErrorIntoConsole(&debugLogInfo);
-        printf("Cannot open log file: %s\n", logFileName);
 
         return ERR_FILE_NOT_FOUND;
     }
 
     fprintf(file, "<h3>DUMP. Dump after DELETE(%d)</h3>\n", elem);
 
-    FCLOSE(file);
 
     return ERR_OK;
 }
+
+ErrorCode openLogFile(FILE** file){
+
+    *file = fopen(LOG_FILENAME, "a");
+    if (*file == NULL) {
+        error_debug debugLogInfo = {};
+        ERROR_STRUCT_FORMAT(&debugLogInfo, __func__, __LINE__, "File-problem", ERR_FILE_NOT_FOUND);
+        printErrorIntoConsole(&debugLogInfo);
+        printf("Cannot open log file: %s\n", LOG_FILENAME);
+
+        return ERR_FILE_NOT_FOUND;
+    }
+
+    return ERR_OK;
+}
+
 
 #endif
