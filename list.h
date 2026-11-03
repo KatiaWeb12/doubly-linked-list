@@ -48,6 +48,11 @@ enum ListVerifyLevel {
     VERIFY_FULL = 3
 };
 
+enum NumDump{
+    BEFORE = 1,
+    AFTER = 2
+};
+
 #ifdef LIST_DEBUG
 struct debugList_t {
     const char* name;
@@ -105,16 +110,23 @@ ErrorCode createDebugImage(list_t* list, char* pictureName);
 ErrorCode createLogSpace(list_t* list);
 ErrorCode htmlListDump(list_t* list);
 void launchLogFile();
-ErrorCode dumpHeader(list_t* list);
 ErrorCode loadDump(list_t* list);
-ErrorCode addDump(list_t* list, size_t indexAfter, list_elem_t elem);
-ErrorCode deleteDump(list_t* list, list_elem_t elem);
+ErrorCode addDump(list_t* list, size_t indexAfter, list_elem_t elem, NumDump num);
+ErrorCode deleteDump(list_t* list, list_elem_t elem, NumDump num);
+ErrorCode destroyDump(list_t* list);
 ErrorCode openLogFile(FILE** file);
+void printErrorIntoLog(FILE* logFile, struct error_debug* debugLogInfo);
 
 // Verify
-ListVerifyCode listVerify(const list_t* list, const char* funcName, int line);
+ListVerifyCode listVerify(list_t* list, const char* funcName, int line);
 ErrorCode getVerifyLevel(int argc, char* argv[], list_t* list);
 
+//Tests
+ErrorCode doneTest(int argc, char* argv[]);
+ErrorCode brokenTest(int argc, char* argv[]);
+ErrorCode doneTestInsertBeforeHead(int argc, char* argv[]);
+
+// Macro
 
 #define ERROR_STRUCT_VERIFY_FORMAT(ptr, funcName, lineNum, codeValue)    \
     do {                                                                 \
@@ -130,7 +142,6 @@ ErrorCode getVerifyLevel(int argc, char* argv[], list_t* list);
 #define VERIFY_OK(list, function)                                      \
     do {                                                               \
         if (listVerify((list), (function), __LINE__) != LIST_OK) {     \
-            listDestroy((list));                                       \
             abort();                                                   \
         }                                                              \
     } while (0)                                                        \

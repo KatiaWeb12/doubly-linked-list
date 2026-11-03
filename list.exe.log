@@ -1382,3 +1382,1010 @@ Run file:	C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe
 Directory:	C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\log_02.11.2026_22-24-29
 
 --------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe,
+
+ВНЕЗАПНО: Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x00437043 в функции printLinArr() в файле C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/formLogs.cpp на строке 152. Попытка прочесть данные по адресу 0xCAD89980 в модуле C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 175, Date: 2025-12-31 23:02:50 +0400], Instance: 0x005141DC (32-bit), Flags: Cmdre0, Thread: 0x1EA4 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00437043 in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: printLinArr() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/formLogs.cpp:152:
+
+    150:     if(n == 0) fprintf(file, "РїСѓСЃС‚Рѕ\n");
+    151:     while(n != 0){
+=>  152:         fprintf(file, "%d ", list->listArr[n].value);
+    153:         n = list->listArr[n].next;
+    154:     }
+
+# 1 0x00436CAF in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: printDebugInfoIntoLogFile() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/formLogs.cpp:84:
+
+     82:     addPictureIntoLog(file, list);
+     83: 
+=>   84:     printLinArr(file, list);
+     85: 
+     86:     return;
+
+# 2 0x00436B63 in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: htmlListDump() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/formLogs.cpp:51:
+
+     49:     fprintf(file, "<pre>\n");
+     50: 
+=>   51:     printDebugInfoIntoLogFile(file, list);
+     52: 
+     53:     return ERR_OK;
+
+# 3 0x0043776B in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: listVerify() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/verify.cpp:15:
+
+     13: ListVerifyCode listVerify(list_t* list, const char* funcName, int line){
+     14: 
+=>   15:     htmlListDump(list);
+     16: 
+     17:     error_debug_verify debugLogInfo = {};
+
+# 4 0x00438A2C in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: listDestroy() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/list.cpp:231:
+
+    229:     #ifdef LIST_DEBUG
+    230:         destroyDump(list);
+=>  231:         VERIFY_OK(list, __func__);
+    232:     #endif
+    233: 
+
+# 5 0x00438210 in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: brokenTest() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/list.cpp:78:
+
+     76: 
+     77:     #ifdef LIST_DEBUG
+=>   78:         listDestroy(&list);
+     79:         launchLogFile();
+     80:     #endif
+
+# 6 0x00437E8A in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: main() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/list.cpp:9:
+
+      7: 
+      8:     //return doneTest(argc, argv);
+=>    9:     return brokenTest(argc, argv);
+     10: 
+     11: }
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 175, Date: 2025-12-31 23:02:50 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Kate\Desktop\downloads\TX\TXLib.h
+Compiled:	Nov  3 2026 09:29:33, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Nov 03 2026 09:29:37
+
+Run file:	C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe
+Directory:	C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\log_03.11.2026_09-29-37
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe,
+
+ВНЕЗАПНО: signal (11, 0x00): SIGSEGV: Доступ по неверному указателю. Ставьте ассерты! 
+
+Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x00437043 в функции printLinArr() в файле C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/formLogs.cpp на строке 152. Попытка прочесть данные по адресу 0xCAD89980 в модуле C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 175, Date: 2025-12-31 23:02:50 +0400], Instance: 0x005141DC (32-bit), Flags: Cmdre0, Thread: 0x1EA4 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00437043 in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: printLinArr() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/formLogs.cpp:152:
+
+    150:     if(n == 0) fprintf(file, "РїСѓСЃС‚Рѕ\n");
+    151:     while(n != 0){
+=>  152:         fprintf(file, "%d ", list->listArr[n].value);
+    153:         n = list->listArr[n].next;
+    154:     }
+
+# 1 0x00436CAF in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: printDebugInfoIntoLogFile() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/formLogs.cpp:84:
+
+     82:     addPictureIntoLog(file, list);
+     83: 
+=>   84:     printLinArr(file, list);
+     85: 
+     86:     return;
+
+# 2 0x00436B63 in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: htmlListDump() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/formLogs.cpp:51:
+
+     49:     fprintf(file, "<pre>\n");
+     50: 
+=>   51:     printDebugInfoIntoLogFile(file, list);
+     52: 
+     53:     return ERR_OK;
+
+# 3 0x0043776B in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: listVerify() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/verify.cpp:15:
+
+     13: ListVerifyCode listVerify(list_t* list, const char* funcName, int line){
+     14: 
+=>   15:     htmlListDump(list);
+     16: 
+     17:     error_debug_verify debugLogInfo = {};
+
+# 4 0x00438A2C in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: listDestroy() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/list.cpp:231:
+
+    229:     #ifdef LIST_DEBUG
+    230:         destroyDump(list);
+=>  231:         VERIFY_OK(list, __func__);
+    232:     #endif
+    233: 
+
+# 5 0x00438210 in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: brokenTest() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/list.cpp:78:
+
+     76: 
+     77:     #ifdef LIST_DEBUG
+=>   78:         listDestroy(&list);
+     79:         launchLogFile();
+     80:     #endif
+
+# 6 0x00437E8A in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: main() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/list.cpp:9:
+
+      7: 
+      8:     //return doneTest(argc, argv);
+=>    9:     return brokenTest(argc, argv);
+     10: 
+     11: }
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 175, Date: 2025-12-31 23:02:50 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Kate\Desktop\downloads\TX\TXLib.h
+Compiled:	Nov  3 2026 09:29:33, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Nov 03 2026 09:29:37
+
+Run file:	C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe
+Directory:	C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\log_03.11.2026_09-29-37
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe,
+
+ВНЕЗАПНО: Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x00437043 в функции printLinArr() в файле C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/formLogs.cpp на строке 152. Попытка прочесть данные по адресу 0x4534EE38 в модуле C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 175, Date: 2025-12-31 23:02:50 +0400], Instance: 0x005141DC (32-bit), Flags: Cmdre0, Thread: 0x7F64 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00437043 in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: printLinArr() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/formLogs.cpp:152:
+
+    150:     if(n == 0) fprintf(file, "РїСѓСЃС‚Рѕ\n");
+    151:     while(n != 0){
+=>  152:         fprintf(file, "%d ", list->listArr[n].value);
+    153:         n = list->listArr[n].next;
+    154:     }
+
+# 1 0x00436CAF in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: printDebugInfoIntoLogFile() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/formLogs.cpp:84:
+
+     82:     addPictureIntoLog(file, list);
+     83: 
+=>   84:     printLinArr(file, list);
+     85: 
+     86:     return;
+
+# 2 0x00436B63 in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: htmlListDump() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/formLogs.cpp:51:
+
+     49:     fprintf(file, "<pre>\n");
+     50: 
+=>   51:     printDebugInfoIntoLogFile(file, list);
+     52: 
+     53:     return ERR_OK;
+
+# 3 0x0043776B in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: listVerify() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/verify.cpp:15:
+
+     13: ListVerifyCode listVerify(list_t* list, const char* funcName, int line){
+     14: 
+=>   15:     htmlListDump(list);
+     16: 
+     17:     error_debug_verify debugLogInfo = {};
+
+# 4 0x00438A45 in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: listDestroy() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/list.cpp:231:
+
+    229:     #ifdef LIST_DEBUG
+    230:         destroyDump(list);
+=>  231:         VERIFY_OK(list, __func__);
+    232:     #endif
+    233: 
+
+# 5 0x00438210 in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: brokenTest() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/list.cpp:78:
+
+     76: 
+     77:     #ifdef LIST_DEBUG
+=>   78:         listDestroy(&list);
+     79:         launchLogFile();
+     80:     #endif
+
+# 6 0x00437E8A in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: main() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/list.cpp:9:
+
+      7: 
+      8:     //return doneTest(argc, argv);
+=>    9:     return brokenTest(argc, argv);
+     10: 
+     11: }
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 175, Date: 2025-12-31 23:02:50 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Kate\Desktop\downloads\TX\TXLib.h
+Compiled:	Nov  3 2026 09:30:34, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Nov 03 2026 09:30:39
+
+Run file:	C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe
+Directory:	C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\log_03.11.2026_09-30-38
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe,
+
+ВНЕЗАПНО: signal (11, 0x00): SIGSEGV: Доступ по неверному указателю. Ставьте ассерты! 
+
+Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x00437043 в функции printLinArr() в файле C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/formLogs.cpp на строке 152. Попытка прочесть данные по адресу 0x4534EE38 в модуле C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 175, Date: 2025-12-31 23:02:50 +0400], Instance: 0x005141DC (32-bit), Flags: Cmdre0, Thread: 0x7F64 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00437043 in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: printLinArr() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/formLogs.cpp:152:
+
+    150:     if(n == 0) fprintf(file, "РїСѓСЃС‚Рѕ\n");
+    151:     while(n != 0){
+=>  152:         fprintf(file, "%d ", list->listArr[n].value);
+    153:         n = list->listArr[n].next;
+    154:     }
+
+# 1 0x00436CAF in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: printDebugInfoIntoLogFile() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/formLogs.cpp:84:
+
+     82:     addPictureIntoLog(file, list);
+     83: 
+=>   84:     printLinArr(file, list);
+     85: 
+     86:     return;
+
+# 2 0x00436B63 in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: htmlListDump() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/formLogs.cpp:51:
+
+     49:     fprintf(file, "<pre>\n");
+     50: 
+=>   51:     printDebugInfoIntoLogFile(file, list);
+     52: 
+     53:     return ERR_OK;
+
+# 3 0x0043776B in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: listVerify() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/verify.cpp:15:
+
+     13: ListVerifyCode listVerify(list_t* list, const char* funcName, int line){
+     14: 
+=>   15:     htmlListDump(list);
+     16: 
+     17:     error_debug_verify debugLogInfo = {};
+
+# 4 0x00438A45 in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: listDestroy() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/list.cpp:231:
+
+    229:     #ifdef LIST_DEBUG
+    230:         destroyDump(list);
+=>  231:         VERIFY_OK(list, __func__);
+    232:     #endif
+    233: 
+
+# 5 0x00438210 in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: brokenTest() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/list.cpp:78:
+
+     76: 
+     77:     #ifdef LIST_DEBUG
+=>   78:         listDestroy(&list);
+     79:         launchLogFile();
+     80:     #endif
+
+# 6 0x00437E8A in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: main() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/list.cpp:9:
+
+      7: 
+      8:     //return doneTest(argc, argv);
+=>    9:     return brokenTest(argc, argv);
+     10: 
+     11: }
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 175, Date: 2025-12-31 23:02:50 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Kate\Desktop\downloads\TX\TXLib.h
+Compiled:	Nov  3 2026 09:30:34, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Nov 03 2026 09:30:39
+
+Run file:	C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe
+Directory:	C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\log_03.11.2026_09-30-38
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe,
+
+ВНЕЗАПНО: Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x00437043 в функции printLinArr() в файле C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/formLogs.cpp на строке 152. Попытка прочесть данные по адресу 0xCAC39968 в модуле C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 175, Date: 2025-12-31 23:02:50 +0400], Instance: 0x005141DC (32-bit), Flags: Cmdre0, Thread: 0x6718 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00437043 in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: printLinArr() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/formLogs.cpp:152:
+
+    150:     if(n == 0) fprintf(file, "РїСѓСЃС‚Рѕ\n");
+    151:     while(n != 0){
+=>  152:         fprintf(file, "%d ", list->listArr[n].value);
+    153:         n = list->listArr[n].next;
+    154:     }
+
+# 1 0x00436CAF in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: printDebugInfoIntoLogFile() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/formLogs.cpp:84:
+
+     82:     addPictureIntoLog(file, list);
+     83: 
+=>   84:     printLinArr(file, list);
+     85: 
+     86:     return;
+
+# 2 0x00436B63 in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: htmlListDump() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/formLogs.cpp:51:
+
+     49:     fprintf(file, "<pre>\n");
+     50: 
+=>   51:     printDebugInfoIntoLogFile(file, list);
+     52: 
+     53:     return ERR_OK;
+
+# 3 0x0043776B in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: listVerify() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/verify.cpp:15:
+
+     13: ListVerifyCode listVerify(list_t* list, const char* funcName, int line){
+     14: 
+=>   15:     htmlListDump(list);
+     16: 
+     17:     error_debug_verify debugLogInfo = {};
+
+# 4 0x00438A90 in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: listDestroy() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/list.cpp:231:
+
+    229:     #ifdef LIST_DEBUG
+    230:         destroyDump(list);
+=>  231:         VERIFY_OK(list, __func__);
+    232:     #endif
+    233: 
+
+# 5 0x00438274 in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: brokenTest() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/list.cpp:78:
+
+     76: 
+     77:     #ifdef LIST_DEBUG
+=>   78:         listDestroy(&list);
+     79:         launchLogFile();
+     80:     #endif
+
+# 6 0x00437EEE in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: main() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/list.cpp:9:
+
+      7: 
+      8:     //return doneTest(argc, argv);
+=>    9:     return brokenTest(argc, argv);
+     10: 
+     11: }
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 175, Date: 2025-12-31 23:02:50 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Kate\Desktop\downloads\TX\TXLib.h
+Compiled:	Nov  3 2026 09:31:54, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Nov 03 2026 09:31:58
+
+Run file:	C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe
+Directory:	C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\log_03.11.2026_09-31-57
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe,
+
+ВНЕЗАПНО: signal (11, 0x00): SIGSEGV: Доступ по неверному указателю. Ставьте ассерты! 
+
+Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x00437043 в функции printLinArr() в файле C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/formLogs.cpp на строке 152. Попытка прочесть данные по адресу 0xCAC39968 в модуле C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 175, Date: 2025-12-31 23:02:50 +0400], Instance: 0x005141DC (32-bit), Flags: Cmdre0, Thread: 0x6718 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00437043 in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: printLinArr() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/formLogs.cpp:152:
+
+    150:     if(n == 0) fprintf(file, "РїСѓСЃС‚Рѕ\n");
+    151:     while(n != 0){
+=>  152:         fprintf(file, "%d ", list->listArr[n].value);
+    153:         n = list->listArr[n].next;
+    154:     }
+
+# 1 0x00436CAF in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: printDebugInfoIntoLogFile() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/formLogs.cpp:84:
+
+     82:     addPictureIntoLog(file, list);
+     83: 
+=>   84:     printLinArr(file, list);
+     85: 
+     86:     return;
+
+# 2 0x00436B63 in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: htmlListDump() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/formLogs.cpp:51:
+
+     49:     fprintf(file, "<pre>\n");
+     50: 
+=>   51:     printDebugInfoIntoLogFile(file, list);
+     52: 
+     53:     return ERR_OK;
+
+# 3 0x0043776B in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: listVerify() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/verify.cpp:15:
+
+     13: ListVerifyCode listVerify(list_t* list, const char* funcName, int line){
+     14: 
+=>   15:     htmlListDump(list);
+     16: 
+     17:     error_debug_verify debugLogInfo = {};
+
+# 4 0x00438A90 in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: listDestroy() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/list.cpp:231:
+
+    229:     #ifdef LIST_DEBUG
+    230:         destroyDump(list);
+=>  231:         VERIFY_OK(list, __func__);
+    232:     #endif
+    233: 
+
+# 5 0x00438274 in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: brokenTest() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/list.cpp:78:
+
+     76: 
+     77:     #ifdef LIST_DEBUG
+=>   78:         listDestroy(&list);
+     79:         launchLogFile();
+     80:     #endif
+
+# 6 0x00437EEE in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: main() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/list.cpp:9:
+
+      7: 
+      8:     //return doneTest(argc, argv);
+=>    9:     return brokenTest(argc, argv);
+     10: 
+     11: }
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 175, Date: 2025-12-31 23:02:50 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Kate\Desktop\downloads\TX\TXLib.h
+Compiled:	Nov  3 2026 09:31:54, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Nov 03 2026 09:31:58
+
+Run file:	C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe
+Directory:	C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\log_03.11.2026_09-31-57
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe,
+
+ВНЕЗАПНО: Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x0043703E в функции printLinArr() в файле C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/formLogs.cpp на строке 150. Попытка прочесть данные по адресу 0xCAC49968 в модуле C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 175, Date: 2025-12-31 23:02:50 +0400], Instance: 0x005141DC (32-bit), Flags: Cmdre0, Thread: 0x72C0 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0043703E in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: printLinArr() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/formLogs.cpp:150:
+
+    148:     if(n == 0) fprintf(file, "РїСѓСЃС‚Рѕ\n");
+    149:     while(n != 0){
+=>  150:         fprintf(file, "%d ", list->listArr[n].value);
+    151:         n = list->listArr[n].next;
+    152:     }
+
+# 1 0x00436CAA in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: printDebugInfoIntoLogFile() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/formLogs.cpp:82:
+
+     80:     addPictureIntoLog(file, list);
+     81: 
+=>   82:     printLinArr(file, list);
+     83: 
+     84:     return;
+
+# 2 0x00436B5E in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: htmlListDump() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/formLogs.cpp:49:
+
+     47:     fprintf(file, "<pre>\n");
+     48: 
+=>   49:     printDebugInfoIntoLogFile(file, list);
+     50: 
+     51:     return ERR_OK;
+
+# 3 0x00437766 in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: listVerify() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/verify.cpp:15:
+
+     13: ListVerifyCode listVerify(list_t* list, const char* funcName, int line){
+     14: 
+=>   15:     htmlListDump(list);
+     16: 
+     17:     error_debug_verify debugLogInfo = {};
+
+# 4 0x00438A90 in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: listDestroy() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/list.cpp:231:
+
+    229:     #ifdef LIST_DEBUG
+    230:         destroyDump(list);
+=>  231:         VERIFY_OK(list, __func__);
+    232:     #endif
+    233: 
+
+# 5 0x00438274 in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: brokenTest() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/list.cpp:78:
+
+     76: 
+     77:     #ifdef LIST_DEBUG
+=>   78:         listDestroy(&list);
+     79:         launchLogFile();
+     80:     #endif
+
+# 6 0x00437EEE in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: main() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/list.cpp:9:
+
+      7: 
+      8:     //return doneTest(argc, argv);
+=>    9:     return brokenTest(argc, argv);
+     10: 
+     11: }
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 175, Date: 2025-12-31 23:02:50 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Kate\Desktop\downloads\TX\TXLib.h
+Compiled:	Nov  3 2026 09:37:21, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Nov 03 2026 09:37:25
+
+Run file:	C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe
+Directory:	C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\log_03.11.2026_09-37-25
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe,
+
+ВНЕЗАПНО: signal (11, 0x00): SIGSEGV: Доступ по неверному указателю. Ставьте ассерты! 
+
+Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x0043703E в функции printLinArr() в файле C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/formLogs.cpp на строке 150. Попытка прочесть данные по адресу 0xCAC49968 в модуле C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe. Спасибо _txUnhandledExceptionFilter(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 175, Date: 2025-12-31 23:02:50 +0400], Instance: 0x005141DC (32-bit), Flags: Cmdre0, Thread: 0x72C0 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0043703E in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: printLinArr() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/formLogs.cpp:150:
+
+    148:     if(n == 0) fprintf(file, "РїСѓСЃС‚Рѕ\n");
+    149:     while(n != 0){
+=>  150:         fprintf(file, "%d ", list->listArr[n].value);
+    151:         n = list->listArr[n].next;
+    152:     }
+
+# 1 0x00436CAA in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: printDebugInfoIntoLogFile() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/formLogs.cpp:82:
+
+     80:     addPictureIntoLog(file, list);
+     81: 
+=>   82:     printLinArr(file, list);
+     83: 
+     84:     return;
+
+# 2 0x00436B5E in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: htmlListDump() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/formLogs.cpp:49:
+
+     47:     fprintf(file, "<pre>\n");
+     48: 
+=>   49:     printDebugInfoIntoLogFile(file, list);
+     50: 
+     51:     return ERR_OK;
+
+# 3 0x00437766 in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: listVerify() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/verify.cpp:15:
+
+     13: ListVerifyCode listVerify(list_t* list, const char* funcName, int line){
+     14: 
+=>   15:     htmlListDump(list);
+     16: 
+     17:     error_debug_verify debugLogInfo = {};
+
+# 4 0x00438A90 in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: listDestroy() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/list.cpp:231:
+
+    229:     #ifdef LIST_DEBUG
+    230:         destroyDump(list);
+=>  231:         VERIFY_OK(list, __func__);
+    232:     #endif
+    233: 
+
+# 5 0x00438274 in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: brokenTest() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/list.cpp:78:
+
+     76: 
+     77:     #ifdef LIST_DEBUG
+=>   78:         listDestroy(&list);
+     79:         launchLogFile();
+     80:     #endif
+
+# 6 0x00437EEE in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: main() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/list.cpp:9:
+
+      7: 
+      8:     //return doneTest(argc, argv);
+=>    9:     return brokenTest(argc, argv);
+     10: 
+     11: }
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 175, Date: 2025-12-31 23:02:50 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Kate\Desktop\downloads\TX\TXLib.h
+Compiled:	Nov  3 2026 09:37:21, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Nov 03 2026 09:37:25
+
+Run file:	C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe
+Directory:	C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\log_03.11.2026_09-37-25
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe,
+
+ВНЕЗАПНО: signal (22, 0x00): SIGABRT: Аварийное завершение программы, вызвана функция abort(). 
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#1: TXLib [Ver: 00173a, Rev: 175, Date: 2025-12-31 23:02:50 +0400], Instance: 0x005141DC (32-bit), Flags: Cmdre0, Thread: 0x82B0 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00414FFE in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: (anonymous namespace)::TX::_txOnSignal() at C:/Users/Kate/Desktop/downloads/TX/TXLib.h:11343
+# 1 0x76DD8F03 in C:\WINDOWS\System32\msvcrt.dll: raise()
+# 2 0x76DDD3CB in C:\WINDOWS\System32\msvcrt.dll: abort()
+
+# 3 0x00438B65 in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: listDestroy() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/list.cpp:231:
+
+    229:     #ifdef LIST_DEBUG
+    230:         destroyDump(list);
+=>  231:         VERIFY_OK(list, __func__);
+    232:     #endif
+    233: 
+
+# 4 0x00438354 in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: brokenTest() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/list.cpp:78:
+
+     76: 
+     77:     #ifdef LIST_DEBUG
+=>   78:         listDestroy(&list);
+     79:         launchLogFile();
+     80:     #endif
+
+# 5 0x00437FCE in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: main() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/list.cpp:9:
+
+      7: 
+      8:     //return doneTest(argc, argv);
+=>    9:     return brokenTest(argc, argv);
+     10: 
+     11: }
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 175, Date: 2025-12-31 23:02:50 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Kate\Desktop\downloads\TX\TXLib.h
+Compiled:	Nov  3 2026 09:55:14, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Nov 03 2026 09:55:17
+
+Run file:	C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe
+Directory:	C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\log_03.11.2026_09-55-17
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe,
+
+ВНЕЗАПНО: signal (22, 0x00): SIGABRT: Аварийное завершение программы, вызвана функция abort(). 
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#1: TXLib [Ver: 00173a, Rev: 175, Date: 2025-12-31 23:02:50 +0400], Instance: 0x005141DC (32-bit), Flags: Cmdre0, Thread: 0x1C08 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00414FFE in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: (anonymous namespace)::TX::_txOnSignal() at C:/Users/Kate/Desktop/downloads/TX/TXLib.h:11343
+# 1 0x76DD8F03 in C:\WINDOWS\System32\msvcrt.dll: raise()
+# 2 0x76DDD3CB in C:\WINDOWS\System32\msvcrt.dll: abort()
+
+# 3 0x004385E9 in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: listAddElem() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/list.cpp:136:
+
+    134:     #ifdef LIST_DEBUG
+    135:         addDump(list, indexAfter, value, BEFORE);
+=>  136:         VERIFY_OK(list, __func__);
+    137:     #endif
+    138: 
+
+# 4 0x004382F8 in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: brokenTest() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/list.cpp:72:
+
+     70:     list.listArr[3].next = 56;
+     71: 
+=>   72:     addedIndex = listAddElem(&list, addedIndex, 80);
+     73:     addedIndex = listAddElem(&list, addedIndex, 90);
+     74: 
+
+# 5 0x00437FCE in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: main() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/list.cpp:9:
+
+      7: 
+      8:     //return doneTest(argc, argv);
+=>    9:     return brokenTest(argc, argv);
+     10: 
+     11: }
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 175, Date: 2025-12-31 23:02:50 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Kate\Desktop\downloads\TX\TXLib.h
+Compiled:	Nov  3 2026 10:01:57, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Nov 03 2026 10:02:01
+
+Run file:	C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe
+Directory:	C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\log_03.11.2026_10-02-01
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe,
+
+ВНЕЗАПНО: signal (22, 0x00): SIGABRT: Аварийное завершение программы, вызвана функция abort(). 
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#1: TXLib [Ver: 00173a, Rev: 175, Date: 2025-12-31 23:02:50 +0400], Instance: 0x005141DC (32-bit), Flags: Cmdre0, Thread: 0x3B70 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00414FFE in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: (anonymous namespace)::TX::_txOnSignal() at C:/Users/Kate/Desktop/downloads/TX/TXLib.h:11343
+# 1 0x76DD8F03 in C:\WINDOWS\System32\msvcrt.dll: raise()
+# 2 0x76DDD3CB in C:\WINDOWS\System32\msvcrt.dll: abort()
+
+# 3 0x00438609 in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: listAddElem() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/list.cpp:136:
+
+    134:     #ifdef LIST_DEBUG
+    135:         addDump(list, indexAfter, value, BEFORE);
+=>  136:         VERIFY_OK(list, __func__);
+    137:     #endif
+    138: 
+
+# 4 0x00438318 in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: brokenTest() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/list.cpp:72:
+
+     70:     list.listArr[3].next = 56;
+     71: 
+=>   72:     addedIndex = listAddElem(&list, addedIndex, 80);
+     73:     addedIndex = listAddElem(&list, addedIndex, 90);
+     74: 
+
+# 5 0x00437FEE in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: main() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/list.cpp:9:
+
+      7: 
+      8:     //return doneTest(argc, argv);
+=>    9:     return brokenTest(argc, argv);
+     10: 
+     11: }
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 175, Date: 2025-12-31 23:02:50 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Kate\Desktop\downloads\TX\TXLib.h
+Compiled:	Nov  3 2026 10:05:30, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Nov 03 2026 10:05:33
+
+Run file:	C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe
+Directory:	C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\log_03.11.2026_10-05-33
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe,
+
+ВНЕЗАПНО: signal (22, 0x00): SIGABRT: Аварийное завершение программы, вызвана функция abort(). 
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#1: TXLib [Ver: 00173a, Rev: 175, Date: 2025-12-31 23:02:50 +0400], Instance: 0x005141DC (32-bit), Flags: Cmdre0, Thread: 0x70F4 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00414FFE in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: (anonymous namespace)::TX::_txOnSignal() at C:/Users/Kate/Desktop/downloads/TX/TXLib.h:11343
+# 1 0x76DD8F03 in C:\WINDOWS\System32\msvcrt.dll: raise()
+# 2 0x76DDD3CB in C:\WINDOWS\System32\msvcrt.dll: abort()
+
+# 3 0x00438609 in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: listAddElem() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/list.cpp:136:
+
+    134:     #ifdef LIST_DEBUG
+    135:         addDump(list, indexAfter, value, BEFORE);
+=>  136:         VERIFY_OK(list, __func__);
+    137:     #endif
+    138: 
+
+# 4 0x00438318 in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: brokenTest() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/list.cpp:72:
+
+     70:     list.listArr[3].next = 56;
+     71: 
+=>   72:     addedIndex = listAddElem(&list, addedIndex, 80);
+     73:     addedIndex = listAddElem(&list, addedIndex, 90);
+     74: 
+
+# 5 0x00437FEE in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: main() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/list.cpp:9:
+
+      7: 
+      8:     //return doneTest(argc, argv);
+=>    9:     return brokenTest(argc, argv);
+     10: 
+     11: }
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 175, Date: 2025-12-31 23:02:50 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Kate\Desktop\downloads\TX\TXLib.h
+Compiled:	Nov  3 2026 10:44:02, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Nov 03 2026 10:44:06
+
+Run file:	C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe
+Directory:	C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\log_03.11.2026_10-44-06
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe,
+
+ВНЕЗАПНО: signal (22, 0x00): SIGABRT: Аварийное завершение программы, вызвана функция abort(). 
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#1: TXLib [Ver: 00173a, Rev: 175, Date: 2025-12-31 23:02:50 +0400], Instance: 0x005141DC (32-bit), Flags: Cmdre0, Thread: 0x42E8 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00414FFE in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: (anonymous namespace)::TX::_txOnSignal() at C:/Users/Kate/Desktop/downloads/TX/TXLib.h:11343
+# 1 0x76DD8F03 in C:\WINDOWS\System32\msvcrt.dll: raise()
+# 2 0x76DDD3CB in C:\WINDOWS\System32\msvcrt.dll: abort()
+
+# 3 0x004387F0 in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: listAddElem() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/list.cpp:175:
+
+    173:     #ifdef LIST_DEBUG
+    174:         addDump(list, indexAfter, value, BEFORE);
+=>  175:         VERIFY_OK(list, __func__);
+    176:     #endif
+    177: 
+
+# 4 0x004384FF in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: brokenTest() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/list.cpp:111:
+
+    109:     list.listArr[3].next = 56;
+    110: 
+=>  111:     addedIndex = listAddElem(&list, addedIndex, 80);
+    112:     addedIndex = listAddElem(&list, addedIndex, 90);
+    113: 
+
+# 5 0x00437FEE in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: main() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/list.cpp:9:
+
+      7: 
+      8:     //return doneTest(argc, argv);
+=>    9:     return brokenTest(argc, argv);
+     10:     return doneTestInsertBeforeHead(argc, argv);
+     11: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 175, Date: 2025-12-31 23:02:50 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Kate\Desktop\downloads\TX\TXLib.h
+Compiled:	Nov  3 2026 10:48:38, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Nov 03 2026 10:48:43
+
+Run file:	C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe
+Directory:	C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\log_03.11.2026_10-48-42
+
+--------------------------------------------------

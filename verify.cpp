@@ -10,7 +10,9 @@ struct error_debug_verify {
     ListVerifyCode errCode;
 };
 
-ListVerifyCode listVerify(const list_t* list, const char* funcName, int line){
+ListVerifyCode listVerify(list_t* list, const char* funcName, int line){
+
+    htmlListDump(list);
 
     error_debug_verify debugLogInfo = {};
     ERROR_STRUCT_VERIFY_FORMAT(&debugLogInfo, funcName, line, LIST_OK);
@@ -26,24 +28,28 @@ ListVerifyCode listVerify(const list_t* list, const char* funcName, int line){
 
         debugLogInfo.errCode = LIST_NULL_ARRAY;
         printVerifyErrorIntoLog(logFile, &debugLogInfo);
+        launchLogFile();
         return LIST_NULL_ARRAY;
     }
     if(list->capacity <= 1){
 
         debugLogInfo.errCode = LIST_INVALID_CAPACITY;
         printVerifyErrorIntoLog(logFile, &debugLogInfo);
+        launchLogFile();
         return LIST_INVALID_CAPACITY;
     }
     if(list->head > list->capacity){
 
         debugLogInfo.errCode = LIST_INVALID_HEAD;
         printVerifyErrorIntoLog(logFile, &debugLogInfo);
+        launchLogFile();
         return LIST_INVALID_HEAD;
     }
     if(list->tail > list->capacity){
 
         debugLogInfo.errCode = LIST_INVALID_TAIL;
         printVerifyErrorIntoLog(logFile, &debugLogInfo);
+        launchLogFile();
         return LIST_INVALID_TAIL;
     }
     if (verifyLevel >= VERIFY_MEDIUM){
@@ -52,17 +58,20 @@ ListVerifyCode listVerify(const list_t* list, const char* funcName, int line){
 
             debugLogInfo.errCode = LIST_INVALID_EXTRA_EL;
             printVerifyErrorIntoLog(logFile, &debugLogInfo);
+            launchLogFile();
             return LIST_INVALID_EXTRA_EL;
         }
         if(list->listArr[0].next != (int)list->head){
             debugLogInfo.errCode = LIST_INVALID_EXTRA_EL;
             printVerifyErrorIntoLog(logFile, &debugLogInfo);
+            launchLogFile();
             return LIST_INVALID_EXTRA_EL;
         }
         if(list->listArr[0].prev != (int)list->tail){
 
             debugLogInfo.errCode = LIST_INVALID_EXTRA_EL;
             printVerifyErrorIntoLog(logFile, &debugLogInfo);
+            launchLogFile();
             return LIST_INVALID_EXTRA_EL;
         }
     }
@@ -81,12 +90,14 @@ ListVerifyCode listVerify(const list_t* list, const char* funcName, int line){
 
                 debugLogInfo.errCode = LIST_CYCLE;
                 printVerifyErrorIntoLog(logFile, &debugLogInfo);
+                launchLogFile();
                 return LIST_CYCLE;
             }
             if(currentElem >= list->capacity){
 
                 debugLogInfo.errCode = LIST_INVALID_NEXT;
                 printVerifyErrorIntoLog(logFile, &debugLogInfo);
+                launchLogFile();
                 return LIST_INVALID_NEXT;
             }
 
@@ -95,30 +106,35 @@ ListVerifyCode listVerify(const list_t* list, const char* funcName, int line){
 
                 debugLogInfo.errCode = LIST_ACTIVE_POISON;
                 printVerifyErrorIntoLog(logFile, &debugLogInfo);
+                launchLogFile();
                 return LIST_ACTIVE_POISON;
             }
             if((activeElem.prev < 0 || (size_t)activeElem.prev >= list->capacity)){
 
                 debugLogInfo.errCode = LIST_INVALID_PREV;
                 printVerifyErrorIntoLog(logFile, &debugLogInfo);
+                launchLogFile();
                 return LIST_INVALID_PREV;
             }
             if(activeElem.next < 0 || (size_t)activeElem.next >= list->capacity){
 
                 debugLogInfo.errCode = LIST_INVALID_NEXT;
                 printVerifyErrorIntoLog(logFile, &debugLogInfo);
+                launchLogFile();
                 return LIST_INVALID_NEXT;
             }
             if(list->listArr[myPrev].next != (int)currentElem){
 
                 debugLogInfo.errCode = LIST_BAD_PREV_NEXT;
                 printVerifyErrorIntoLog(logFile, &debugLogInfo);
+                launchLogFile();
                 return LIST_BAD_PREV_NEXT;
             }
             if(list->listArr[activeElem.next].prev != (int)currentElem){
 
                 debugLogInfo.errCode = LIST_BAD_NEXT_PREV;
                 printVerifyErrorIntoLog(logFile, &debugLogInfo);
+                launchLogFile();
                 return LIST_BAD_NEXT_PREV;
             }
 
@@ -129,6 +145,7 @@ ListVerifyCode listVerify(const list_t* list, const char* funcName, int line){
 
                 debugLogInfo.errCode = LIST_INVALID_TAIL;
                 printVerifyErrorIntoLog(logFile, &debugLogInfo);
+                launchLogFile();
                 return LIST_INVALID_TAIL;
         }
 
@@ -143,12 +160,14 @@ ListVerifyCode listVerify(const list_t* list, const char* funcName, int line){
 
                 debugLogInfo.errCode = LIST_CYCLE;
                 printVerifyErrorIntoLog(logFile, &debugLogInfo);
+                launchLogFile();
                 return LIST_FREE_CYCLE;
             }
             if(currentElem >= list->capacity){
 
                 debugLogInfo.errCode = LIST_INVALID_NEXT;
                 printVerifyErrorIntoLog(logFile, &debugLogInfo);
+                launchLogFile();
                 return LIST_INVALID_FREE;
             }
 
@@ -158,18 +177,21 @@ ListVerifyCode listVerify(const list_t* list, const char* funcName, int line){
 
                 debugLogInfo.errCode = LIST_INVALID_FREE;
                 printVerifyErrorIntoLog(logFile, &debugLogInfo);
+                launchLogFile();
                 return LIST_INVALID_FREE;
             }
             if(elemFree.value != LIST_POISON){
 
                 debugLogInfo.errCode = LIST_INVALID_FREE;
                 printVerifyErrorIntoLog(logFile, &debugLogInfo);
+                launchLogFile();
                 return LIST_INVALID_FREE;
             }
             if(elemFree.next < 0 || elemFree.next >= (int)list->capacity){
 
                 debugLogInfo.errCode = LIST_INVALID_NEXT;
                 printVerifyErrorIntoLog(logFile, &debugLogInfo);
+                launchLogFile();
                 return LIST_INVALID_NEXT;
             }
 
@@ -180,6 +202,7 @@ ListVerifyCode listVerify(const list_t* list, const char* funcName, int line){
 
             debugLogInfo.errCode = LIST_LOST_ELEMENT;
             printVerifyErrorIntoLog(logFile, &debugLogInfo);
+            launchLogFile();
             return LIST_LOST_ELEMENT;
         }
     }
@@ -198,7 +221,8 @@ ErrorCode getVerifyLevel(int argc, char* argv[], list_t* list){
     }
 
     if (argc != 2) {
-        printf("Usage: %s <verify_level>\n"
+
+        printf("%s <verify_level>\n"
                 "1 - LIGHT\n"
                 "2 - MEDIUM\n"
                 "3 - FULL\n",
@@ -229,6 +253,8 @@ static void printVerifyErrorIntoLog(FILE* logFile, struct error_debug_verify* de
             debugLogInfo->errCode,
             debugLogInfo->file,
             debugLogInfo->line);
+
+    FCLOSE(logFile);
 
     return;
 }

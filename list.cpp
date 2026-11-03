@@ -5,12 +5,20 @@
 
 int main(int argc, char* argv[]){
 
+    return doneTest(argc, argv);
+    //return brokenTest(argc, argv);
+    //return doneTestInsertBeforeHead(argc, argv);
+
+}
+
+ErrorCode doneTest(int argc, char* argv[]){
+
     list_t list = {};
 
     #ifdef LIST_DEBUG
         createLogSpace(&list);
 
-        if (getVerifyLevel(argc, argv, &list) != ERR_OK) return 1;
+        if (getVerifyLevel(argc, argv, &list) != ERR_OK) return ERR_OK;
     #endif
 
     listInit(&list, LIST_CAPACITY);
@@ -31,9 +39,92 @@ int main(int argc, char* argv[]){
     listDelElem(&list, 7);
 
     #ifdef LIST_DEBUG
+        listDestroy(&list);
         launchLogFile();
     #endif
+
+    return ERR_OK;
 }
+
+ErrorCode doneTestInsertBeforeHead(int argc, char* argv[]){
+
+    list_t list = {};
+
+    #ifdef LIST_DEBUG
+        createLogSpace(&list);
+
+        if (getVerifyLevel(argc, argv, &list) != ERR_OK) return ERR_OK;
+    #endif
+
+    listInit(&list, LIST_CAPACITY);
+
+    size_t addedIndex = 0;
+
+    addedIndex = listAddElem(&list, 0, 10);
+    addedIndex = listAddElem(&list, addedIndex, 20);
+    addedIndex = listAddElem(&list, addedIndex, 30);
+    addedIndex = listAddElem(&list, addedIndex, 40);
+    addedIndex = listAddElem(&list, addedIndex, 50);
+    addedIndex = listAddElem(&list, addedIndex, 60);
+    addedIndex = listAddElem(&list, addedIndex, 70);
+
+    addedIndex = listAddElem(&list, addedIndex, 80);
+    addedIndex = listAddElem(&list, addedIndex, 90);
+
+    addedIndex = listAddElem(&list, 3, 35);
+    listDelElem(&list, 7);
+
+    addedIndex = listAddElem(&list, 0, 5);
+
+    #ifdef LIST_DEBUG
+        listDestroy(&list);
+        launchLogFile();
+    #endif
+
+    return ERR_OK;
+}
+
+ErrorCode brokenTest(int argc, char* argv[]){
+
+    list_t list = {};
+
+    #ifdef LIST_DEBUG
+        createLogSpace(&list);
+
+        if (getVerifyLevel(argc, argv, &list) != ERR_OK) return ERR_OK;
+    #endif
+
+    listInit(&list, LIST_CAPACITY);
+
+    size_t addedIndex = 0;
+
+    addedIndex = listAddElem(&list, 0, 10);
+    addedIndex = listAddElem(&list, addedIndex, 20);
+    addedIndex = listAddElem(&list, addedIndex, 30);
+    addedIndex = listAddElem(&list, addedIndex, 40);
+    addedIndex = listAddElem(&list, addedIndex, 50);
+    addedIndex = listAddElem(&list, addedIndex, 60);
+    addedIndex = listAddElem(&list, addedIndex, 70);
+
+    list.listArr[3].next = 56;
+
+    addedIndex = listAddElem(&list, addedIndex, 80);
+    addedIndex = listAddElem(&list, addedIndex, 90);
+
+    addedIndex = listAddElem(&list, 3, 35);
+    listDelElem(&list, 7);
+
+
+    #ifdef LIST_DEBUG
+        listDestroy(&list);
+        launchLogFile();
+    #endif
+
+    return ERR_OK;
+}
+
+
+
 
 ErrorCode listInit(list_t* list, const size_t listCapacity){
 
@@ -46,7 +137,7 @@ ErrorCode listInit(list_t* list, const size_t listCapacity){
     if (memoryArr == NULL){
         error_debug debugLogInfo = {};
         ERROR_STRUCT_FORMAT(&debugLogInfo, __func__, __LINE__, "", ERR_OUT_OF_MEMORY);
-        printErrorIntoConsole(&debugLogInfo);
+        printErrorIntoLog(list->logFilePtr, &debugLogInfo);
         return ERR_OUT_OF_MEMORY;
     }
     list->listArr = memoryArr;
@@ -68,9 +159,8 @@ ErrorCode listInit(list_t* list, const size_t listCapacity){
         list->debugInfo.function = __func__;
         list->debugInfo.line = __LINE__;
         list->debugInfo.logPictureNum = 0;
-        loadDump(list);
-        htmlListDump(list);
 
+        loadDump(list);
         VERIFY_OK(list, __func__);
     #endif
 
@@ -80,12 +170,17 @@ ErrorCode listInit(list_t* list, const size_t listCapacity){
 
 size_t listAddElem(list_t* list, const size_t indexAfter, const list_elem_t value){
 
+    #ifdef LIST_DEBUG
+        addDump(list, indexAfter, value, BEFORE);
+        VERIFY_OK(list, __func__);
+    #endif
+
     assert(list);
 
     if (indexAfter >= list->capacity){
         error_debug debugLogInfo = {};
         ERROR_STRUCT_FORMAT(&debugLogInfo, __func__, __LINE__, "indexAfter incorrect", ERR_OUT_OF_MEMORY);
-        printErrorIntoConsole(&debugLogInfo);
+        printErrorIntoLog(list->logFilePtr, &debugLogInfo);
         abort();
     }
 
@@ -106,9 +201,7 @@ size_t listAddElem(list_t* list, const size_t indexAfter, const list_elem_t valu
     list->tail = list->listArr[0].prev;
 
     #ifdef LIST_DEBUG
-        addDump(list, indexAfter, value);
-        htmlListDump(list);
-
+        addDump(list, indexAfter, value, AFTER);
         VERIFY_OK(list, __func__);
     #endif
 
@@ -121,7 +214,6 @@ size_t getFreeEl(list_t* list, ErrorCode* error){
     assert(error);
 
     size_t i = list->free;
-
     list->free = list->listArr[i].next;
 
     *error = ERR_OK;
@@ -136,7 +228,7 @@ ErrorCode listDelElem(list_t* list, const size_t indexDel){
     if (indexDel > list->capacity){
         error_debug debugLogInfo = {};
         ERROR_STRUCT_FORMAT(&debugLogInfo, __func__, __LINE__, "indexDel incorrect", ERR_OUT_OF_MEMORY);
-        printErrorIntoConsole(&debugLogInfo);
+        printErrorIntoLog(list->logFilePtr, &debugLogInfo);
         return ERR_INVALID_ARGUMENT;
     }
 
@@ -144,6 +236,11 @@ ErrorCode listDelElem(list_t* list, const size_t indexDel){
     size_t nextIndex = list->listArr[indexDel].next;
 
     list_elem_t deletingValue = list->listArr[indexDel].value;
+
+    #ifdef LIST_DEBUG
+        deleteDump(list, deletingValue, BEFORE);
+        VERIFY_OK(list, __func__);
+    #endif
 
     list->listArr[prevIndex].next = list->listArr[indexDel].next;
     list->listArr[nextIndex].prev = list->listArr[indexDel].prev;
@@ -158,9 +255,7 @@ ErrorCode listDelElem(list_t* list, const size_t indexDel){
     list->tail = list->listArr[0].prev;
 
     #ifdef LIST_DEBUG
-        deleteDump(list,deletingValue);
-        htmlListDump(list);
-
+        deleteDump(list, deletingValue, AFTER);
         VERIFY_OK(list, __func__);
     #endif
 
@@ -172,6 +267,9 @@ ErrorCode listDestroy(list_t* list) {
     assert(list);
 
     #ifdef LIST_DEBUG
+        destroyDump(list);
+        VERIFY_OK(list, __func__);
+
         if (list->logFilePtr != NULL) {
 
             FCLOSE(list->logFilePtr);

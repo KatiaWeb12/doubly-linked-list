@@ -5,6 +5,7 @@ static void printArr(FILE* file, listArrElem* arr);
 static void printArrEl(FILE* file, const list_elem_t value);
 static void printLinArr(FILE* file, const list_t* list);
 static void addPictureIntoLog(FILE* file, list_t* list);
+static ErrorCode logHeader(list_t* list);
 
 #ifdef LIST_DEBUG
 
@@ -27,13 +28,13 @@ ErrorCode createLogSpace(list_t* list){
     if(error != ERR_OK) {
         error_debug debugLogInfo = {};
         ERROR_STRUCT_FORMAT(&debugLogInfo, __func__, __LINE__, "", error);
-        printErrorIntoConsole(&debugLogInfo);
+        printErrorIntoLog(file, &debugLogInfo);
         return error;
     };
 
     list->logFilePtr = file;
 
-    return ERR_OK;
+    return logHeader(list);
 }
 
 ErrorCode htmlListDump(list_t* list){
@@ -73,9 +74,6 @@ static void printDebugInfoIntoLogFile(FILE* file, list_t* list){
             list->debugInfo.line);
 
     fprintf(file, "<p>capacity = %u</p>", list->capacity);
-    // fprintf(file, "<p>head = %u</p>", list->head);
-    // fprintf(file, "<p>tail = %u</p>", list->tail);
-    // fprintf(file, "<p>free = %u</p>", list->free);
 
     fprintf(file, "</div>\n</div>\n");
 
@@ -136,7 +134,7 @@ static void addPictureIntoLog(FILE* file, list_t* list){
 
     createDebugImage(list, pictureName);
 
-    fprintf(file, "<img src='%s' width=3000px>", pictureName);
+    fprintf(file, "<img src='%s' style=\"max-width:100%%; height:auto;\">", pictureName);
 }
 
 static void printLinArr(FILE* file, const list_t* list){
@@ -146,13 +144,30 @@ static void printLinArr(FILE* file, const list_t* list){
 
     fprintf(file, "<p>\nПолный список в правильном порядке: ");
 
-    int n = (int)list->head;
-    if(n == 0) fprintf(file, "пусто\n");
-    while(n != 0){
-        fprintf(file, "%d, ", list->listArr[n].value);
-        n = list->listArr[n].next;
+    size_t n = list->head;
+    size_t count = 0;
+
+    while (n != 0 && count < list->capacity) {
+
+        if (n >= list->capacity) {
+            fprintf(file, "<b>INVALID INDEX: %u</b>\n", n);
+            break;
+        }
+
+        fprintf(file, "%d ", list->listArr[n].value);
+
+        int next = list->listArr[n].next;
+
+        if (next < 0 || (size_t)next >= list->capacity) {
+            fprintf(file, "<b>\n NEXT: %d\n</b>\n", next);
+            break;
+        }
+
+        n = (size_t)next;
+        count++;
     }
-    fprintf(file, "</p>\n");
+
+    fprintf(file, "\n</p>\n");
 }
 
 void launchLogFile(){
@@ -165,7 +180,7 @@ void launchLogFile(){
     return;
 }
 
-ErrorCode dumpHeader(list_t* list){
+static ErrorCode logHeader(list_t* list){
 
     assert(list);
 
@@ -173,15 +188,15 @@ ErrorCode dumpHeader(list_t* list){
     if (file == NULL) {
         error_debug debugLogInfo = {};
         ERROR_STRUCT_FORMAT(&debugLogInfo, __func__, __LINE__, "File-problem", ERR_FILE_NOT_FOUND);
-        printErrorIntoConsole(&debugLogInfo);
+        printErrorIntoLog(file, &debugLogInfo);
 
         return ERR_FILE_NOT_FOUND;
     }
 
-    char timeString[32] = {};                                        \
+    char timeString[32] = {};
     getOperationTime(timeString, sizeof(timeString));
 
-    fprintf(file, "<h3>DUMP [%s]-----------------------------</h3>\n", timeString);
+    fprintf(file, "<h3>LOG FILE [%s]</h3>\n", timeString);
 
     return ERR_OK;
 }
@@ -194,7 +209,7 @@ ErrorCode loadDump(list_t* list){
     if (file == NULL) {
         error_debug debugLogInfo = {};
         ERROR_STRUCT_FORMAT(&debugLogInfo, __func__, __LINE__, "File-problem", ERR_FILE_NOT_FOUND);
-        printErrorIntoConsole(&debugLogInfo);
+        printErrorIntoLog(file, &debugLogInfo);
 
         return ERR_FILE_NOT_FOUND;
     }
@@ -204,7 +219,7 @@ ErrorCode loadDump(list_t* list){
     return ERR_OK;
 }
 
-ErrorCode addDump(list_t* list, size_t indexAfter, list_elem_t elem){
+ErrorCode addDump(list_t* list, size_t indexAfter, list_elem_t elem, NumDump num){
 
     assert(list);
 
@@ -212,17 +227,22 @@ ErrorCode addDump(list_t* list, size_t indexAfter, list_elem_t elem){
     if (file == NULL) {
         error_debug debugLogInfo = {};
         ERROR_STRUCT_FORMAT(&debugLogInfo, __func__, __LINE__, "File-problem", ERR_FILE_NOT_FOUND);
-        printErrorIntoConsole(&debugLogInfo);
+        printErrorIntoLog(file, &debugLogInfo);
 
         return ERR_FILE_NOT_FOUND;
     }
+    if(num == BEFORE){
+        fprintf(file, "<h3>DUMP. Dump before ADD(%d) after index: %u</h3>\n", elem, indexAfter);
+    }
+    else{
+        fprintf(file, "<h3>DUMP. Dump after ADD(%d) after index: %u</h3>\n", elem, indexAfter);
+    }
 
-    fprintf(file, "<h3>DUMP. Dump after ADD(%d) after index: %u</h3>\n", elem, indexAfter);
 
     return ERR_OK;
 }
 
-ErrorCode deleteDump(list_t* list, list_elem_t elem){
+ErrorCode deleteDump(list_t* list, list_elem_t elem, NumDump num){
 
     assert(list);
 
@@ -230,13 +250,34 @@ ErrorCode deleteDump(list_t* list, list_elem_t elem){
     if (file == NULL) {
         error_debug debugLogInfo = {};
         ERROR_STRUCT_FORMAT(&debugLogInfo, __func__, __LINE__, "File-problem", ERR_FILE_NOT_FOUND);
-        printErrorIntoConsole(&debugLogInfo);
+        printErrorIntoLog(file, &debugLogInfo);
+
+        return ERR_FILE_NOT_FOUND;
+    }
+    if(num == BEFORE){
+        fprintf(file, "<h3>DUMP. Dump before DELETE(%d)</h3>\n", elem);
+    }
+    else{
+        fprintf(file, "<h3>DUMP. Dump after DELETE(%d)</h3>\n", elem);
+    }
+
+    return ERR_OK;
+}
+
+ErrorCode destroyDump(list_t* list){
+
+    assert(list);
+
+    FILE* file = list->logFilePtr;
+    if (file == NULL) {
+        error_debug debugLogInfo = {};
+        ERROR_STRUCT_FORMAT(&debugLogInfo, __func__, __LINE__, "File-problem", ERR_FILE_NOT_FOUND);
+        printErrorIntoLog(file, &debugLogInfo);
 
         return ERR_FILE_NOT_FOUND;
     }
 
-    fprintf(file, "<h3>DUMP. Dump after DELETE(%d)</h3>\n", elem);
-
+    fprintf(file, "<h3>DUMP. Dump before DESTROY</h3>\n");
 
     return ERR_OK;
 }
@@ -247,7 +288,7 @@ ErrorCode openLogFile(FILE** file){
     if (*file == NULL) {
         error_debug debugLogInfo = {};
         ERROR_STRUCT_FORMAT(&debugLogInfo, __func__, __LINE__, "File-problem", ERR_FILE_NOT_FOUND);
-        printErrorIntoConsole(&debugLogInfo);
+        printErrorIntoLog(*file, &debugLogInfo);
         printf("Cannot open log file: %s\n", LOG_FILENAME);
 
         return ERR_FILE_NOT_FOUND;
@@ -256,5 +297,18 @@ ErrorCode openLogFile(FILE** file){
     return ERR_OK;
 }
 
+void printErrorIntoLog(FILE* logFile, struct error_debug* debugLogInfo){
+
+    assert(debugLogInfo);
+
+    fprintf(logFile, "<h2>[%s] Function '%s' was completed with Error %d in file '%s' in line %d </h2>\n",
+            debugLogInfo->time,
+            debugLogInfo->function,
+            debugLogInfo->errCode,
+            debugLogInfo->file,
+            debugLogInfo->line);
+
+    return;
+}
 
 #endif
