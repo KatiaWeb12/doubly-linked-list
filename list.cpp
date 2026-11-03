@@ -6,7 +6,7 @@
 int main(int argc, char* argv[]){
 
     return doneTest(argc, argv);
-    //return brokenTest(argc, argv);
+    // return brokenTest(argc, argv);
     //return doneTestInsertBeforeHead(argc, argv);
 
 }
@@ -106,7 +106,7 @@ ErrorCode brokenTest(int argc, char* argv[]){
     addedIndex = listAddElem(&list, addedIndex, 60);
     addedIndex = listAddElem(&list, addedIndex, 70);
 
-    list.listArr[3].next = 56;
+    list.listArr[3].prev = -1;
 
     addedIndex = listAddElem(&list, addedIndex, 80);
     addedIndex = listAddElem(&list, addedIndex, 90);

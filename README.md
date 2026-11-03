@@ -126,5 +126,5 @@ HTML-дамп содержит:
 Картинки создаются командой ```dot graph.txt -Tpng -o graph1.png``` через ```system```.
 
 ## Пример лога
-<img src="graphExample.png" alt="Компьютер" width="500" height="300">
+<img src="graphExample.png" alt="Компьютер" width="800" height="500">
 

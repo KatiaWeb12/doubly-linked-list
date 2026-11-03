@@ -2389,3 +2389,62 @@ Run file:	C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe
 Directory:	C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\log_03.11.2026_10-48-42
 
 --------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe,
+
+ВНЕЗАПНО: signal (22, 0x00): SIGABRT: Аварийное завершение программы, вызвана функция abort(). 
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#1: TXLib [Ver: 00173a, Rev: 175, Date: 2025-12-31 23:02:50 +0400], Instance: 0x005141DC (32-bit), Flags: Cmdre0, Thread: 0x4640 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00414FFE in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: (anonymous namespace)::TX::_txOnSignal() at C:/Users/Kate/Desktop/downloads/TX/TXLib.h:11343
+# 1 0x76DD8F03 in C:\WINDOWS\System32\msvcrt.dll: raise()
+# 2 0x76DDD3CB in C:\WINDOWS\System32\msvcrt.dll: abort()
+
+# 3 0x0043862F in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: listAddElem() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/list.cpp:175:
+
+    173:     #ifdef LIST_DEBUG
+    174:         addDump(list, indexAfter, value, BEFORE);
+=>  175:         VERIFY_OK(list, __func__);
+    176:     #endif
+    177: 
+
+# 4 0x0043833E in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: brokenTest() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/list.cpp:111:
+
+    109:     list.listArr[3].prev = -1;
+    110: 
+=>  111:     addedIndex = listAddElem(&list, addedIndex, 80);
+    112:     addedIndex = listAddElem(&list, addedIndex, 90);
+    113: 
+
+# 5 0x00437E2D in C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe: main() at C:/Users/Kate/Desktop/DED-C_Tasks/Task 7 list/list.cpp:9:
+
+      7: 
+      8:     // return doneTest(argc, argv);
+=>    9:     return brokenTest(argc, argv);
+     10:     //return doneTestInsertBeforeHead(argc, argv);
+     11: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 175, Date: 2025-12-31 23:02:50 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	C:\Users\Kate\Desktop\downloads\TX\TXLib.h
+Compiled:	Nov  3 2026 13:55:26, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Nov 03 2026 13:55:59
+
+Run file:	C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\list.exe
+Directory:	C:\Users\Kate\Desktop\DED-C_Tasks\Task 7 list\log_03.11.2026_13-55-59
+
+--------------------------------------------------
